@@ -3,7 +3,7 @@ import { formatBan } from "components/Banano";
 
 const TotalContributors = ({ stats }) => {
   return (
-    <React.Fragment>
+    <div className="bg-dark rounded-md rounded-l-none border-banano-yellow border-l-4 w-80 shadow-sm shadow-black">
       <div className="p-4">Top Contributors</div>
       <div>
         <div className="text-sm">
@@ -43,7 +43,7 @@ const TotalContributors = ({ stats }) => {
           })}
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

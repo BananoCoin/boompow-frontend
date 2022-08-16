@@ -32,14 +32,14 @@ function measureText(str, fontSize) {
   );
 }
 
-export const Skeleton = ({ custom, text }) => {
+export const Skeleton = ({ size, text }) => {
   return (
     <div
       style={{
         width: text ? `${measureText(text.toString(), 16).toFixed()}px` : "",
       }}
-      className={`w-20 h-4 bg-light animate-pulse rounded ${
-        custom ? custom : ""
+      className={`w-20 h-4 bg-banano-gray-dark animate-pulse rounded ${
+        size ? size : ""
       }`}
     ></div>
   );

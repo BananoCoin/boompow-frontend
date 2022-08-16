@@ -13,7 +13,7 @@ function App() {
         // LOADER HERE IN THE FUTURE.
         fallback={<div className="bg-banano-gray w-full h-full"></div>}
       >
-        <div className="w-full h-full bg-banano-gray flex justify-center items-center px-4">
+        <div className="w-full h-full bg-banano-gray flex justify-center items-center px-4 overflow-y-scroll">
           <Routes>
             <Route path="*" element={<Main />} />
           </Routes>
