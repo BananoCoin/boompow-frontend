@@ -3,8 +3,6 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "components/Header";
 
-import tile from "images/tile.webp";
-
 const Main = React.lazy(() => import("./pages/Main"));
 
 function App() {
