@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "#1d1e26",
         dark: "#151517",
         accent: {
           DEFAULT: "#ddb242",
@@ -19,6 +20,7 @@ module.exports = {
           },
         },
       },
+      // SHOULD BE FILSON PRO, BUT I DON'T HAVE ACCESS TO THAT.
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
       },

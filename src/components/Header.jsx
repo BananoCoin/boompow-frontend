@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <div
-      className="shrink-0 flex px-4 justify-center items-center w-full h-20 sm:h-24 bg-dark"
+      className="shrink-0 flex px-4 justify-center items-center w-full h-20 sm:h-24 bg-dark z-10"
       style={{
         boxShadow: "rgb(0 0 0 / 25%) 0px 10px 12px",
       }}
