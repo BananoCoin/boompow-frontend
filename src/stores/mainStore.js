@@ -1,1 +1,4 @@
-export const mainStore = (set) => ({});
+export const mainStore = (set) => ({
+  stats: null,
+  setStats: (stats) => set({ stats }),
+});

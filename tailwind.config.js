@@ -4,6 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        dark: "#18181a",
+        accent: {
+          DEFAULT: "#ddb242",
+          secondary: "#ebbf3d",
+        },
         // * BANANO PRESS KIT
         banano: {
           yellow: "#FBDD11",
