@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+    app:
+        container_name: boompow_frontend
+        ports:
+          - 127.0.0.1:3002:3000
+        environment:
+          - PORT=3000
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - $PWD:/app:cached
+        restart: on-failure
+        entrypoint: /bin/zsh
+        stdin_open: true
+        tty: true
+        networks: ['app-network']
+
+networks:
+    app-network:
+        driver: bridge

@@ -1,2 +1,9 @@
+# Global project ignores
+.DS_Store
 node_modules
-/client/build
+*.log
+.env
+
+# Global package-level ignores
+**/**/build
+**/**/dist
