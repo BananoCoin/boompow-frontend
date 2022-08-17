@@ -31,6 +31,7 @@ const Login = () => {
           try {
             // SHOULD SET TOKEN TO A COOKIE?
             const resp = await Auth.login(values.email, values.password);
+            // ! TODO - this is dangerous, we should remove "token" from this object and store it somewhere secure
             setUser(resp);
             navigate('/dashboard');
           } catch (e) {

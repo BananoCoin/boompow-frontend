@@ -10,8 +10,6 @@ const Dashboard = () => {
 
   const [copied, setCopied] = React.useState(false);
 
-  console.log(user);
-
   return (
     <div className="w-full h-full flex flex-col max-w-3xl py-8 md:py-16 text-gray-200">
       <div className="text-gray-300 text-xl font-bold">DASHBOARD</div>
