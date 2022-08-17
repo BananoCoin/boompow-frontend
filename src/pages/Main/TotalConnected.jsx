@@ -8,7 +8,7 @@ const TotalConnected = ({ amount }) => {
         <div className="text-gray-200 text-xl">Users Connected</div>
         <div>
           <div className="text-2xl text-gray-100">
-            {amount ? amount : <Skeleton size="w-[80px] h-[32px]" />}
+            {amount ? amount : <Skeleton size="w-[40px] h-[32px]" />}
           </div>
         </div>
       </div>

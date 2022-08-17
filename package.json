@@ -5,8 +5,10 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "date-fns": "^2.27.0",
+    "formik": "^2.2.9",
     "framer-motion": "^7.2.0",
     "graphql": "^16.5.0",
+    "graphql-ws": "^5.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.0.2",

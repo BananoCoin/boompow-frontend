@@ -1,15 +1,15 @@
 import React from "react";
 import { formatBan } from "components/Banano";
 
-const TopContributors = ({ stats }) => {
+const TopContributors = ({ topContributors }) => {
   return (
-    <div className="bg-dark rounded-md rounded-l-none border-banano-yellow border-l-4 md:w-80 drop-shadow-lg shadow-black min-h-[470px]">
+    <div className="bg-dark rounded-md rounded-l-none border-banano-yellow border-l-4 w-full md:w-80 drop-shadow-lg shadow-black min-h-[470px]">
       <div className="p-4">Top Contributors</div>
       <div>
         <div className="text-sm">
-          {stats ? (
+          {topContributors ? (
             <React.Fragment>
-              {stats.topContributors.map((c, index) => {
+              {topContributors.map((c, index) => {
                 return (
                   <div
                     key={index}
