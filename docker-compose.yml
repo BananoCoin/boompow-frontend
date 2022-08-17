@@ -6,6 +6,7 @@ services:
           - 127.0.0.1:3002:3002
         environment:
           - PORT=3002
+          - REACT_APP_GraphQLURL=http://localhost:8080/graphql
         build:
             context: .
             dockerfile: Dockerfile.dev

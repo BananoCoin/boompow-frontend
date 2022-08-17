@@ -1,26 +1,31 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-import { split, HttpLink } from "@apollo/client";
-import { getMainDefinition } from "@apollo/client/utilities";
-import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
-import { createClient } from "graphql-ws";
+import { split, HttpLink } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
+
+const getWsUrl = (url) =>
+  url.includes('http://')
+    ? url.replace('http://', 'ws://')
+    : url.replace('https://', 'wss://');
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: `wss://${process.env.REACT_APP_GraphQLURL}`,
+    url: getWsUrl(process.env.REACT_APP_GraphQLURL),
   })
 );
 
 const httpLink = new HttpLink({
-  uri: `https://${process.env.REACT_APP_GraphQLURL}`,
+  uri: `${process.env.REACT_APP_GraphQLURL}`,
 });
 
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
     return (
-      definition.kind === "OperationDefinition" &&
-      definition.operation === "subscription"
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
     );
   },
   wsLink,

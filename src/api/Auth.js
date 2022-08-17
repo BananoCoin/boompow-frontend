@@ -1,16 +1,33 @@
-let dummyUser = {
-  email: "klicer@example.org",
-  emailVerified: false,
-  banAddress:
-    "ban_3monkeycojjjto6b5ayan5juhth6ffdcgep19pg7ibpj5fd4bca7x5k3nw69",
-  type: "service",
-  serviceWebsite: "https://example.org",
-  serviceName: "Some Service",
-};
+import { gql } from '@apollo/client';
+import { apolloClient } from 'apollo';
+
+export const LOGIN_MUTATION = gql`
+  mutation login($input: LoginInput!) {
+    login(input: $input) {
+      token
+      banAddress
+      serviceName
+      serviceWebsite
+      type
+      emailVerified
+      email
+    }
+  }
+`;
 
 const Auth = {
-  user: async () => dummyUser,
-  login: async (email, password) => true,
+  login: async (email, password) => {
+    const resp = await apolloClient().mutate({
+      mutation: LOGIN_MUTATION,
+      variables: {
+        input: {
+          email,
+          password,
+        },
+      },
+    });
+    return resp.data?.login;
+  },
   register: async ({
     serviceType,
     email,

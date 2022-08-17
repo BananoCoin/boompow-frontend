@@ -1,19 +1,21 @@
-import Auth from "api/Auth";
+import Auth from 'api/Auth';
 
-import React from "react";
-import { useUserStore } from "stores";
+import React from 'react';
+import { useUserStore } from 'stores';
 
-import ResetPassword from "./ResetPassword";
+import ResetPassword from './ResetPassword';
 
 const Dashboard = () => {
   const { user } = useUserStore();
 
   const [copied, setCopied] = React.useState(false);
 
+  console.log(user);
+
   return (
     <div className="w-full h-full flex flex-col max-w-3xl py-8 md:py-16 text-gray-200">
       <div className="text-gray-300 text-xl font-bold">DASHBOARD</div>
-      <div>Welcome back, {user.email.split("@")[0]}!</div>
+      <div>Welcome back, {user.email.split('@')[0]}!</div>
       <div className="mt-12 text-gray-200">
         <span className="font-semibold mr-2">Account Type:</span>
         {user.type.toUpperCase()}
@@ -24,7 +26,7 @@ const Dashboard = () => {
       </div>
       <div className=" text-gray-200 mb-1">
         <span className={`font-semibold mr-2`}>Email Verified:</span>
-        <span>{user.emailVerified ? "Yes" : "No"}</span>
+        <span>{user.emailVerified ? 'Yes' : 'No'}</span>
         {!user.emailVerified && (
           <button
             className="ml-4 underline text-banano-yellow text-sm"
@@ -36,7 +38,7 @@ const Dashboard = () => {
           </button>
         )}
       </div>
-      {user.type === "provider" && (
+      {user.type === 'provider' && (
         <div className=" text-gray-200">
           <span className="font-semibold mr-2 whitespace-nowrap">
             Banano Address:
@@ -49,11 +51,11 @@ const Dashboard = () => {
               setTimeout(() => setCopied(false), 1000);
             }}
           >
-            {copied ? "Copied address to clipboard!" : user.banAddress}
+            {copied ? 'Copied address to clipboard!' : user.banAddress}
           </span>
         </div>
       )}
-      {user.type === "service" && (
+      {user.type === 'service' && (
         <React.Fragment>
           <div className=" text-gray-200">
             <span className="font-semibold mr-2 whitespace-nowrap">
