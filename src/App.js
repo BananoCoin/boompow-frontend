@@ -8,6 +8,7 @@ import Login from "modals/Login";
 import Register from "modals/Register";
 
 import { useUserStore } from "stores";
+import VerifyEmail from "pages/VerifyEmail";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -47,6 +48,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/verify_email/:token" element={<VerifyEmail />} />
             <Route path="*" element={<Main />} />
           </Routes>
         </div>

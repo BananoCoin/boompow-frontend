@@ -20,7 +20,9 @@ const Auth = {
     serviceWebsite,
   }) => true,
   changePassword: async (oldPassword, newPassword) => true,
-  resendVerificationEmail: () => true,
+
+  resendVerificationEmail: async () => true,
+  verifyEmail: async (token) => true,
 };
 
 export default Auth;
