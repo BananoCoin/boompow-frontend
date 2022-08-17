@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { useSubscription } from "@apollo/client";
-import { useSearchParams } from "react-router-dom";
+import { useSubscription } from '@apollo/client';
+import { useSearchParams } from 'react-router-dom';
 
-import TopContributors from "./TopContributors";
-import TotalPaid from "./TotalPaid";
-import TotalRegistered from "./TotalRegistered";
-import TotalConnected from "./TotalConnected";
+import TopContributors from './TopContributors';
+import TotalPaid from './TotalPaid';
+import TotalRegistered from './TotalRegistered';
+import TotalConnected from './TotalConnected';
 
-import { STATS_SUBSCRIPTION } from "api/Stats.js";
-import { useMainStore } from "stores";
+import { STATS_SUBSCRIPTION } from 'api/Stats.js';
+import { useMainStore } from 'stores';
 
 const Main = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -19,15 +19,20 @@ const Main = () => {
   const { data, loading } = useSubscription(STATS_SUBSCRIPTION);
   React.useEffect(() => {
     if (!data) return;
-    setStats({ ...stats, totalConnected: data?.stats?.connectedWorkers });
+    setStats({
+      ...stats,
+      totalConnected: data?.stats?.connectedWorkers,
+      totalPaidBanano: data?.stats?.totalPaidBanano,
+      registeredServiceCount: data?.stats?.registeredServiceCount,
+    });
   }, [data]);
 
   return (
     <div className="w-full max-w-5xl h-full flex flex-col items-center text-gray-100 font-semibold text-2xl">
       <div className="mb-6 flex gap-6 flex-col mt-8 md:mt-16 md:flex-row w-full justify-center items-center whitespace-nowrap">
-        <TotalPaid amount={stats?.totalPaid} />
+        <TotalPaid amount={stats?.totalPaidBanano} />
         <TotalConnected amount={stats?.totalConnected} />
-        <TotalRegistered amount={stats?.registeredServices} />
+        <TotalRegistered amount={stats?.registeredServiceCount} />
       </div>
       <div className="flex flex-col md:flex-row mt-2 pb-8 md:mt-24 md:justify-between max-w-4xl items-center">
         <TopContributors topContributors={stats?.topContributors} />
@@ -48,7 +53,7 @@ const Main = () => {
             <button
               className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}
               onClick={(e) => {
-                setSearchParams("?modal=register&type=provider");
+                setSearchParams('?modal=register&type=provider');
               }}
             >
               Register Provider
@@ -56,7 +61,7 @@ const Main = () => {
             <button
               className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}
               onClick={(e) => {
-                setSearchParams("?modal=register&type=service");
+                setSearchParams('?modal=register&type=service');
               }}
             >
               Register Service

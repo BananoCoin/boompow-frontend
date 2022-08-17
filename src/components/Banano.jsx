@@ -39,7 +39,7 @@ export const formatBan = (value, width) => {
   return (
     <div className="flex gap-2">
       <Banano width={width} />
-      <div>{formatNum(parseFloat(value.toFixed(2)))}</div>
+      <div>{formatNum(parseFloat(value))}</div>
     </div>
   );
 };
