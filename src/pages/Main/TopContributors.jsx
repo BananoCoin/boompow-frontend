@@ -17,16 +17,17 @@ const TopContributors = ({ topContributors }) => {
                   >
                     <div className="flex">
                       <img
-                        src={c.monkeyImg}
+                        src={`https://monkey.banano.cc/api/v1/monkey/${c.banAddress}`}
+                        alt="avatar"
                         width="48px"
                         height="48px"
                         className="rounded-full bg-banano-gray-dark"
                       />
                       <div className="flex flex-col ml-4 justify-between">
                         <div className="text-gray-300">
-                          {c.walletAddress.substr(0, 13)}...
+                          {c.banAddress.substr(0, 13)}...
                         </div>
-                        <div>{formatBan(c.totalPaid)}</div>
+                        <div>{formatBan(c.totalPaidBanano)}</div>
                       </div>
                     </div>
                     <div className="text-gray-400 font-medium">

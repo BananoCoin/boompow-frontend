@@ -24,6 +24,7 @@ const Main = () => {
       totalConnected: data?.stats?.connectedWorkers,
       totalPaidBanano: data?.stats?.totalPaidBanano,
       registeredServiceCount: data?.stats?.registeredServiceCount,
+      topContributors: data?.stats?.top10,
     });
   }, [data]);
 

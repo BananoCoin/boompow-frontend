@@ -6,6 +6,10 @@ export const STATS_SUBSCRIPTION = gql`
       connectedWorkers
       totalPaidBanano
       registeredServiceCount
+      top10 {
+        banAddress
+        totalPaidBanano
+      }
     }
   }
 `;
