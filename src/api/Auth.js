@@ -15,6 +15,12 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
+export const VERIFY_EMAIL_QUERY = gql`
+  query verifyEmail($input: VerifyEmailInput!) {
+    verifyEmail(input: $input)
+  }
+`;
+
 const Auth = {
   login: async (email, password) => {
     const resp = await apolloClient().mutate({
@@ -26,7 +32,10 @@ const Auth = {
         },
       },
     });
-    return resp.data?.login;
+    if (resp.data.login) {
+      return resp.data.login;
+    }
+    throw new Error(`Unknown error processing login`);
   },
   register: async ({
     serviceType,
@@ -39,7 +48,21 @@ const Auth = {
   changePassword: async (oldPassword, newPassword) => true,
 
   resendVerificationEmail: async () => true,
-  verifyEmail: async (token) => true,
+  verifyEmail: async (email, token) => {
+    const resp = await apolloClient().query({
+      query: VERIFY_EMAIL_QUERY,
+      variables: {
+        input: {
+          email,
+          token,
+        },
+      },
+    });
+    if (resp.data.verifyEmail) {
+      return resp.data.verifyEmail;
+    }
+    throw new Error('Unknown error verifying email');
+  },
 };
 
 export default Auth;
