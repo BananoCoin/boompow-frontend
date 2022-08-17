@@ -3,9 +3,9 @@ services:
     app:
         container_name: boompow_frontend
         ports:
-          - 127.0.0.1:3002:3000
+          - 127.0.0.1:3002:3002
         environment:
-          - PORT=3000
+          - PORT=3002
         build:
             context: .
             dockerfile: Dockerfile.dev
