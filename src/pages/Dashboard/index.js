@@ -102,6 +102,7 @@ const Dashboard = () => {
                   <Link
                     to="/install"
                     className="bg-dark transition-colors w-min whitespace-nowrap text-gray-400 font-medium flex p-2 rounded hover:bg-dark/75 hover:text-gray-300"
+                    title="Install Instructions"
                   >
                     Install BoomPOW
                   </Link>

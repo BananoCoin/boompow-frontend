@@ -13,3 +13,13 @@ export const STATS_SUBSCRIPTION = gql`
     }
   }
 `;
+
+export default {
+  services: async () => {
+    return new Array(150).fill({
+      name: "Banano Casino",
+      website: "https://banano.casino",
+      amountOfRequests: Math.floor(Math.random() * 1000)
+    });
+  }
+};

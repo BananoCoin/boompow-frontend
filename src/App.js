@@ -2,16 +2,18 @@ import React, { Suspense } from "react";
 import { Routes, Route, useSearchParams, Navigate } from "react-router-dom";
 
 import Header from "components/Header";
-
 import Modal from "components/Modal";
+
+import Loader from "components/Loader";
+
 import Login from "modals/Login";
 import Register from "modals/Register";
-
-import VerifyEmail from "pages/VerifyEmail";
-import Loader from "components/Loader";
 import Recover from "modals/Recover";
-import { useCookies } from "react-cookie";
+
+import Services from "pages/Services";
+import VerifyEmail from "pages/VerifyEmail";
 import Install from "pages/Install";
+import { useCookies } from "react-cookie";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -53,6 +55,7 @@ function App() {
         <div className="w-full h-full bg-primary flex justify-center items-center px-4 overflow-y-auto">
           <Routes>
             <Route path="/install" element={<Install />} />
+            <Route path="/services" element={<Services />} />
             <Route
               path="/dashboard"
               element={
