@@ -5,7 +5,24 @@ import { useCookies } from "react-cookie";
 import { useQuery } from "@apollo/client";
 
 import ResetPassword from "./ResetPassword";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+const WarningSvg = () => (
+  <svg
+    className="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+    ></path>
+  </svg>
+);
 
 const Dashboard = () => {
   const [copied, setCopied] = React.useState(false);
@@ -33,8 +50,8 @@ const Dashboard = () => {
   const user = data.getUser;
 
   return (
-    <div className="flex w-full md:w-1/2 flex-col max-w-3xl text-gray-200">
-      <div className="bg-dark rounded-md p-8">
+    <div className="flex w-full md:w-1/2 flex-col max-w-4xl text-gray-200">
+      <div className="rounded-md p-8">
         <div className="text-gray-300 text-xl font-bold mb-6">
           ACCOUNT DASHBOARD
         </div>
@@ -50,12 +67,13 @@ const Dashboard = () => {
             <div>
               {!user.emailVerified && (
                 <button
-                  className="ml-4 px-1 py-1 rounded hover:bg-banano-gray transition-colors bg-banano-gray-dark text-sm text-yellow-400"
+                  className="flex items-center ml-4 px-1 py-1 rounded hover:bg-dark/75 transition-colors bg-dark text-sm text-accent hover:text-accent-secondary"
                   onClick={async () => {
                     await Auth.resendVerificationEmail();
                   }}
                 >
-                  Resend Verification Email
+                  <WarningSvg />
+                  <span className="ml-1">Resend Verification Email</span>
                 </button>
               )}
             </div>
@@ -76,6 +94,18 @@ const Dashboard = () => {
                 >
                   {copied ? "Copied address to clipboard!" : user.banAddress}
                 </button>
+              </div>
+            </div>
+            <div className=" text-gray-200 flex gap-8 items-center mt-8">
+              <div className="text-gray-200 flex flex-col">
+                <div>
+                  <Link
+                    to="/install"
+                    className="bg-dark transition-colors w-min whitespace-nowrap text-gray-400 font-medium flex p-2 rounded hover:bg-dark/75 hover:text-gray-300"
+                  >
+                    Install BoomPOW
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
