@@ -1,15 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import { useSubscription } from '@apollo/client';
-import { useSearchParams } from 'react-router-dom';
+import { useSubscription } from "@apollo/client";
+import { useSearchParams } from "react-router-dom";
 
-import TopContributors from './TopContributors';
-import TotalPaid from './TotalPaid';
-import TotalRegistered from './TotalRegistered';
-import TotalConnected from './TotalConnected';
+import TopContributors from "./TopContributors";
+import TotalPaid from "./TotalPaid";
+import TotalRegistered from "./TotalRegistered";
+import TotalConnected from "./TotalConnected";
 
-import { STATS_SUBSCRIPTION } from 'api/Stats.js';
-import { useMainStore } from 'stores';
+import { STATS_SUBSCRIPTION } from "api/Stats.js";
+import { useMainStore } from "stores";
+
+const formatTopContributors = (pTopContributors) => {
+  let topContributors = [];
+  topContributors = pTopContributors.sort((a, b) =>
+    Number(a.totalPaidBanano) > Number(b.totalPaidBanano) ? -1 : 1
+  );
+  return topContributors;
+};
 
 const Main = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -24,7 +32,8 @@ const Main = () => {
       totalConnected: data?.stats?.connectedWorkers,
       totalPaidBanano: data?.stats?.totalPaidBanano,
       registeredServiceCount: data?.stats?.registeredServiceCount,
-      topContributors: data?.stats?.top10,
+      topContributors:
+        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
     });
   }, [data]);
 
@@ -54,7 +63,7 @@ const Main = () => {
             <button
               className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}
               onClick={(e) => {
-                setSearchParams('?modal=register&type=provider');
+                setSearchParams("?modal=register&type=provider");
               }}
             >
               Register Provider
@@ -62,7 +71,7 @@ const Main = () => {
             <button
               className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}
               onClick={(e) => {
-                setSearchParams('?modal=register&type=service');
+                setSearchParams("?modal=register&type=service");
               }}
             >
               Register Service
