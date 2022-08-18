@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "stores";
 import { Formik } from "formik";
 import Auth from "api/Auth";
+import SubmitButton from "components/SubmitButton";
 
 const ResetPassword = () => {
   let navigate = useNavigate();
@@ -94,17 +95,7 @@ const ResetPassword = () => {
                 {error}
               </div>
             )}
-            <button
-              className={`w-full px-4 py-2 rounded-md ${
-                !(isSubmitting || !dirty || !isValid)
-                  ? `bg-banano-yellow hover:bg-accent-secondary text-gray-900 hover:text-gray-800`
-                  : `bg-dark  text-gray-600 flex justify-center items-center`
-              } font-bold`}
-              type="submit"
-              disabled={isSubmitting || !dirty || !isValid}
-            >
-              {isSubmitting ? <span>LOADER HERE!</span> : `Change Password`}
-            </button>
+            <SubmitButton disabled={isSubmitting} text="Change Password"/>
           </form>
         )}
       </Formik>

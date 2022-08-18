@@ -4,6 +4,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUserStore } from "stores";
 import Auth from "api/Auth.js";
 import { ApolloError } from "@apollo/client";
+import Loader from "components/Loader";
+import SubmitButton from "components/SubmitButton";
 
 const Login = () => {
   const [error, setError] = React.useState("");
@@ -98,17 +100,7 @@ const Login = () => {
                 {error}
               </div>
             )}
-            <button
-              className={`w-full px-4 py-2 rounded-md shadow shadow-black ${
-                !isSubmitting
-                  ? `bg-banano-yellow hover:bg-accent-secondary text-gray-900 hover:text-gray-800`
-                  : `bg-primary  text-slate-500 flex justify-center items-center`
-              } font-bold`}
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? <span>LOADER HERE!</span> : `Log In`}
-            </button>
+            <SubmitButton disabled={isSubmitting} text="Log In"/>
             <button
               className="w-full flex justify-center items-center underline font-semibold text-sm text-gray-400 mt-4"
               onClick={() => {

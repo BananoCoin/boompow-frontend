@@ -9,6 +9,7 @@ import Register from "modals/Register";
 
 import { useUserStore } from "stores";
 import VerifyEmail from "pages/VerifyEmail";
+import Loader from "components/Loader";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -30,7 +31,7 @@ function App() {
       <Header />
       <Suspense
         // LOADER HERE IN THE FUTURE.
-        fallback={<div className="bg-primary w-full h-full"></div>}
+        fallback={<div className="bg-primary w-full h-full flex justify-center items-center"><Loader /></div>}
       >
         {!user && searchParams.get("modal") === "login" && (
           <Modal modal={<Login />} />

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "stores";
 import { Formik } from "formik";
 import Auth from "api/Auth";
+import SubmitButton from "components/SubmitButton";
 
 const Service = () => {
   let navigate = useNavigate();
@@ -145,17 +146,7 @@ const Service = () => {
               {error}
             </div>
           )}
-          <button
-            className={`w-full px-4 py-2 rounded-md shadow shadow-black ${
-              !isSubmitting
-                ? `bg-banano-yellow hover:bg-accent-secondary text-gray-900 hover:text-gray-800`
-                : `bg-primary  text-slate-500 flex justify-center items-center`
-            } font-bold`}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? <span>LOADER HERE!</span> : `Register`}
-          </button>
+          <SubmitButton disabled={isSubmitting} text="Register"/>
         </form>
       )}
     </Formik>
