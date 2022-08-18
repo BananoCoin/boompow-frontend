@@ -12,9 +12,9 @@ const Register = () => {
         <button
           className={`${
             searchParams.get("type") === "provider"
-              ? "bg-banano-gray"
-              : "bg-banano-gray-dark"
-          } text-gray-300 px-3 py-1 rounded-md w-full`}
+              ? "bg-banano-gray text-gray-300"
+              : "bg-banano-gray-dark text-gray-500"
+          } px-3 py-1 rounded-md w-full`}
           onClick={() => {
             setSearchParams("?modal=register&type=provider");
           }}
@@ -24,9 +24,9 @@ const Register = () => {
         <button
           className={`${
             searchParams.get("type") === "service"
-              ? "bg-banano-gray"
-              : "bg-banano-gray-dark"
-          } text-gray-300 px-3 py-1 rounded-md w-full`}
+              ? "bg-banano-gray text-gray-300"
+              : "bg-banano-gray-dark text-gray-500"
+          } px-3 py-1 rounded-md w-full`}
           onClick={() => {
             setSearchParams("?modal=register&type=service");
           }}
