@@ -39,7 +39,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        {user.type === "provider" && (
+        {user.type === "PROVIDER" && (
           <div className="mt-4">
             <div className=" text-gray-200 flex gap-8 items-center">
               <div className="text-gray-200 flex flex-col">
@@ -58,7 +58,7 @@ const Dashboard = () => {
             </div>
           </div>
         )}
-        {user.type === "service" && (
+        {user.type === "SERVICE" && (
           <div className="mt-4">
             <div className=" text-gray-200 flex gap-8 items-center">
               <div className="text-gray-200 flex flex-col">
