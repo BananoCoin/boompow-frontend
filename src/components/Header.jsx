@@ -25,9 +25,9 @@ const Header = () => {
             onClick={() => window.scrollTo(0, 0)}
           />
         </Link>
-        <div className="flex text-sm font-medium text-banano-yellow hover:text-accent-secondary gap-2">
+        <div className="flex text-sm font-medium text-banano-yellow gap-2">
           <button
-            className={`border border-banano-yellow hover:border-accent-secondary rounded-md py-2 px-4 transition-colors`}
+            className={`border border-banano-yellow hover:border-accent-secondary hover:text-accent-secondary rounded-md py-2 px-4 transition-colors`}
             onClick={(e) => {
               if (!cookies.token) {
                 setSearchParams("?modal=login");
@@ -39,7 +39,7 @@ const Header = () => {
             {!cookies.token ? "Log In" : "Dashboard"}
           </button>
           <button
-            className={`border border-banano-yellow hover:border-accent-secondary rounded-md py-2 px-4 transition-colors ${
+            className={`border border-banano-yellow hover:border-accent-secondary hover:text-accent-secondary rounded-md py-2 px-4 transition-colors ${
               !cookies.token && "hidden"
             }`}
             onClick={(e) => {
