@@ -17,7 +17,7 @@
         "zustand": "^3.6.5"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "set PORT=3002 && react-scripts start",
         "build": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
         "format": "prettier --write ./**/*.{js,jsx,ts,tsx}"
     },
