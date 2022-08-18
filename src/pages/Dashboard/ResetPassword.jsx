@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserStore } from "stores";
+import { useCookies } from "react-cookie";
 import { Formik } from "formik";
 import Auth from "api/Auth";
 import SubmitButton from "components/SubmitButton";
@@ -9,7 +9,7 @@ const ResetPassword = () => {
   let navigate = useNavigate();
 
   const [error, setError] = React.useState("");
-  const { user, setUser } = useUserStore();
+  const [cookies, setCookie] = useCookies(["token"]);
 
   return (
     <div className="flex flex-col mt-8 min-w-[250px]">
@@ -95,7 +95,7 @@ const ResetPassword = () => {
                 {error}
               </div>
             )}
-            <SubmitButton disabled={isSubmitting} text="Change Password"/>
+            <SubmitButton disabled={isSubmitting} text="Change Password" />
           </form>
         )}
       </Formik>

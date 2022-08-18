@@ -1,18 +1,36 @@
-import Auth from "api/Auth";
+import Auth, { GET_USER_QUERY } from "api/Auth";
 
 import React from "react";
-import { useUserStore } from "stores";
+import { useCookies } from "react-cookie";
+import { useQuery } from "@apollo/client";
 
 import ResetPassword from "./ResetPassword";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { user } = useUserStore();
-
   const [copied, setCopied] = React.useState(false);
+  const [cookies, setCookie] = useCookies(["token"]);
+  const { loading, error, data } = useQuery(GET_USER_QUERY, {
+    context: {
+      headers: {
+        Authorization: cookies.token
+      }
+    }
+  });
+  const navigate = useNavigate();
 
-  React.useState(() => {
-    console.log(user)
-  }, [user])
+  if (loading) return "Loading...";
+
+  if (error) {
+    if (error.message.includes("access denied")) {
+      setCookie("token", "");
+      navigate("/?modal=login");
+    }
+    // 500 ?
+    return error.message;
+  }
+
+  const user = data.getUser;
 
   return (
     <div className="flex w-full md:w-1/2 flex-col max-w-3xl text-gray-200">

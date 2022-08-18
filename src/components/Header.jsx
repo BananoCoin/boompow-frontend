@@ -1,13 +1,13 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import logo from "images/logo.svg";
-import { useUserStore } from "stores";
+import { useCookies } from "react-cookie";
 
 const Header = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   let navigate = useNavigate();
 
-  const { user } = useUserStore();
+  const [cookies, setCookie] = useCookies(["token"]);
 
   return (
     <div
@@ -29,14 +29,25 @@ const Header = () => {
           <button
             className={`border border-banano-yellow hover:border-accent-secondary rounded-md py-2 px-4 transition-colors`}
             onClick={(e) => {
-              if (!user) {
+              if (!cookies.token) {
                 setSearchParams("?modal=login");
               } else {
                 navigate("/dashboard");
               }
             }}
           >
-            {!user ? "Log In" : "Dashboard"}
+            {!cookies.token ? "Log In" : "Dashboard"}
+          </button>
+          <button
+            className={`border border-banano-yellow hover:border-accent-secondary rounded-md py-2 px-4 transition-colors ${
+              !cookies.token && "hidden"
+            }`}
+            onClick={(e) => {
+              setCookie("token", "");
+              navigate("/");
+            }}
+          >
+            Log Out
           </button>
         </div>
       </div>

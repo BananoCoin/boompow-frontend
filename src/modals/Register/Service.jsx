@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserStore } from "stores";
+import { useCookies } from "react-cookie";
 import { Formik } from "formik";
 import Auth from "api/Auth";
 import SubmitButton from "components/SubmitButton";
@@ -9,7 +9,6 @@ const Service = () => {
   let navigate = useNavigate();
 
   const [error, setError] = React.useState("");
-  const { setUser } = useUserStore();
 
   return (
     <Formik
@@ -145,7 +144,7 @@ const Service = () => {
               {error}
             </div>
           )}
-          <SubmitButton disabled={isSubmitting} text="Register Service"/>
+          <SubmitButton disabled={isSubmitting} text="Register Service" />
         </form>
       )}
     </Formik>

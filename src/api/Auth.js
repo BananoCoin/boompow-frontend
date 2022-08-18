@@ -5,12 +5,6 @@ export const LOGIN_MUTATION = gql`
   mutation login($input: LoginInput!) {
     login(input: $input) {
       token
-      banAddress
-      serviceName
-      serviceWebsite
-      type
-      emailVerified
-      email
     }
   }
 `;
@@ -18,6 +12,19 @@ export const LOGIN_MUTATION = gql`
 export const VERIFY_EMAIL_QUERY = gql`
   query verifyEmail($input: VerifyEmailInput!) {
     verifyEmail(input: $input)
+  }
+`;
+
+export const GET_USER_QUERY = gql`
+  query getUser {
+    getUser {
+      banAddress
+      serviceName
+      serviceWebsite
+      type
+      emailVerified
+      email
+    }
   }
 `;
 
@@ -32,7 +39,7 @@ const Auth = {
         }
       }
     });
-    if (resp.data.login) {
+    if (resp.data?.login) {
       return resp.data.login;
     }
     throw new Error(`Unknown error processing login`);
@@ -58,7 +65,7 @@ const Auth = {
         }
       }
     });
-    if (resp.data.verifyEmail) {
+    if (resp.data?.verifyEmail) {
       return resp.data.verifyEmail;
     }
     throw new Error("Unknown error verifying email");

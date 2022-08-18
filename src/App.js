@@ -7,17 +7,17 @@ import Modal from "components/Modal";
 import Login from "modals/Login";
 import Register from "modals/Register";
 
-import { useUserStore } from "stores";
 import VerifyEmail from "pages/VerifyEmail";
 import Loader from "components/Loader";
 import Recover from "modals/Recover";
+import { useCookies } from "react-cookie";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 
-const ProtectedRoute = ({ user, children }) => {
-  if (!user) {
-    return <Navigate to="/" replace />;
+const ProtectedRoute = ({ token, children }) => {
+  if (!token) {
+    return <Navigate to="/?modal=login" replace />;
   }
 
   return children;
@@ -25,32 +25,36 @@ const ProtectedRoute = ({ user, children }) => {
 
 function App() {
   let [searchParams, setSearchParams] = useSearchParams();
-  const { user } = useUserStore();
+  const [cookies, setCookie] = useCookies(["token"]);
 
   return (
     <div className="h-screen w-screen flex flex-col">
       <Header />
       <Suspense
-        fallback={<div className="bg-primary w-full h-full flex justify-center items-center"><Loader /></div>}
+        fallback={
+          <div className="bg-primary w-full h-full flex justify-center items-center">
+            <Loader />
+          </div>
+        }
       >
-        {!user && searchParams.get("modal") === "login" && (
-          <Modal modal={<Login/>} title="Log In"/>
+        {!cookies.token && searchParams.get("modal") === "login" && (
+          <Modal modal={<Login />} title="Log In" />
         )}
 
         {/* PASSWORD RECOVERY */}
-        {!user && searchParams.get("modal") === "recover" && (
-          <Modal modal={<Recover />} title="Recover Password"/>
+        {!cookies.token && searchParams.get("modal") === "recover" && (
+          <Modal modal={<Recover />} title="Recover Password" />
         )}
 
         {searchParams.get("modal") === "register" && (
-          <Modal modal={<Register />} title="Register"/>
+          <Modal modal={<Register />} title="Register" />
         )}
         <div className="w-full h-full bg-primary flex justify-center items-center px-4 overflow-y-auto">
           <Routes>
             <Route
               path="/dashboard"
               element={
-                <ProtectedRoute user={user}>
+                <ProtectedRoute token={cookies.token}>
                   <Dashboard />
                 </ProtectedRoute>
               }

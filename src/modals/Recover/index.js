@@ -1,13 +1,12 @@
 import { Formik } from "formik";
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useUserStore } from "stores";
+import { useCookies } from "react-cookie";
 import Auth from "api/Auth.js";
 import SubmitButton from "components/SubmitButton";
 
 const Recover = () => {
   const [error, setError] = React.useState("");
-  const { user, setUser } = useUserStore();
   let [searchParams, setSearchParams] = useSearchParams();
 
   return (
@@ -24,9 +23,9 @@ const Recover = () => {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            await Auth.sendRecoveryEmail(values.email)
+            await Auth.sendRecoveryEmail(values.email);
           } catch (e) {
-            setError("Unknown error occured, try again later")
+            setError("Unknown error occured, try again later");
           }
           setSubmitting(false);
         }}
@@ -65,7 +64,7 @@ const Recover = () => {
                 {error}
               </div>
             )}
-            <SubmitButton disabled={isSubmitting} text="Send Recovery Email"/>
+            <SubmitButton disabled={isSubmitting} text="Send Recovery Email" />
             <button
               className="w-full flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
               onClick={() => {

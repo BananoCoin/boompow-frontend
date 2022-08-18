@@ -1,16 +1,16 @@
 import { Formik } from "formik";
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useUserStore } from "stores";
 import Auth from "api/Auth.js";
 import { ApolloError } from "@apollo/client";
 import SubmitButton from "components/SubmitButton";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const [error, setError] = React.useState("");
   let navigate = useNavigate();
-  const { user, setUser } = useUserStore();
   let [searchParams, setSearchParams] = useSearchParams();
+  const [cookies, setCookie] = useCookies(["token"]);
 
   return (
     <div className="flex p-8">
@@ -30,10 +30,12 @@ const Login = () => {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            // SHOULD SET TOKEN TO A COOKIE?
             const resp = await Auth.login(values.email, values.password);
-            // ! TODO - this is dangerous, we should remove "token" from this object and store it somewhere secure
-            setUser(resp);
+            const expires = new Date();
+            expires.setHours(expires.getHours() + 20);
+            setCookie("token", resp.token, {
+              expires
+            });
             navigate("/dashboard");
           } catch (e) {
             if (e instanceof ApolloError) {
@@ -98,7 +100,7 @@ const Login = () => {
                 {error}
               </div>
             )}
-            <SubmitButton disabled={isSubmitting} text="Log In"/>
+            <SubmitButton disabled={isSubmitting} text="Log In" />
             <button
               className="w-full flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
               onClick={() => {
