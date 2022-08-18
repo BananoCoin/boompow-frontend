@@ -62,7 +62,9 @@ const Auth = {
       return resp.data.verifyEmail;
     }
     throw new Error("Unknown error verifying email");
-  }
+  },
+
+  sendRecoveryEmail: async (email) => true
 };
 
 export default Auth;
