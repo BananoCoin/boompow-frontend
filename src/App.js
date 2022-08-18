@@ -11,6 +11,7 @@ import VerifyEmail from "pages/VerifyEmail";
 import Loader from "components/Loader";
 import Recover from "modals/Recover";
 import { useCookies } from "react-cookie";
+import Install from "pages/Install";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -51,6 +52,7 @@ function App() {
         )}
         <div className="w-full h-full bg-primary flex justify-center items-center px-4 overflow-y-auto">
           <Routes>
+            <Route path="/install" element={<Install />} />
             <Route
               path="/dashboard"
               element={
