@@ -10,6 +10,7 @@ import Register from "modals/Register";
 import { useUserStore } from "stores";
 import VerifyEmail from "pages/VerifyEmail";
 import Loader from "components/Loader";
+import Recover from "modals/Recover";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -30,14 +31,19 @@ function App() {
     <div className="h-screen w-screen flex flex-col">
       <Header />
       <Suspense
-        // LOADER HERE IN THE FUTURE.
         fallback={<div className="bg-primary w-full h-full flex justify-center items-center"><Loader /></div>}
       >
         {!user && searchParams.get("modal") === "login" && (
-          <Modal modal={<Login />} />
+          <Modal modal={<Login/>} title="Log In"/>
         )}
+
+        {/* PASSWORD RECOVERY */}
+        {!user && searchParams.get("modal") === "recover" && (
+          <Modal modal={<Recover />} title="Recover Password"/>
+        )}
+
         {searchParams.get("modal") === "register" && (
-          <Modal modal={<Register />} />
+          <Modal modal={<Register />} title="Register"/>
         )}
         <div className="w-full h-full bg-primary flex justify-center items-center px-4 overflow-y-auto">
           <Routes>

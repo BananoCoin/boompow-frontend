@@ -16,7 +16,7 @@ export const useOnClickOutside = (ref, handler) => {
   }, [ref, handler]);
 };
 
-const Modal = ({ modal }) => {
+const Modal = ({ modal, title }) => {
   const ref = React.useRef();
   let [searchParams, setSearchParams] = useSearchParams();
 
@@ -34,15 +34,16 @@ const Modal = ({ modal }) => {
         ref={ref}
         className="bg-dark rounded-lg shadow-lg max-w-[400px] w-11/12"
       >
-        <div className="w-full">
-          <div className="w-full flex justify-end items-center p-2 sm:rounded-t-xl">
+        <div className="w-full flex flex-col">
+          <div className="w-full flex justify-between items-center p-2 sm:rounded-t-xl">
+            <div className="text-gray-300/25">{title}</div>
             <button onClick={() => setSearchParams("")}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="#fff"
+                stroke="#d1d5db40"
               >
                 <path
                   strokeLinecap="round"

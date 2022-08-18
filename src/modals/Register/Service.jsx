@@ -66,10 +66,9 @@ const Service = () => {
         handleBlur,
         handleSubmit,
         isSubmitting
-        /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit} className="w-full">
-          <div className="mb-8">
+          <div className="mb-4">
             <div className="text-gray-300">Email</div>
             <input
               className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
@@ -87,7 +86,7 @@ const Service = () => {
               </div>
             )}
           </div>
-          <div className="mb-8">
+          <div className="mb-4">
             <div className="text-gray-300">Password</div>
 
             <input
@@ -106,7 +105,7 @@ const Service = () => {
               </div>
             )}
           </div>
-          <div className="mb-8">
+          <div className="mb-4">
             <div className="text-gray-300">Service Name</div>
             <input
               className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
@@ -123,7 +122,7 @@ const Service = () => {
               </div>
             )}
           </div>
-          <div className="mb-12">
+          <div className="mb-8">
             <div className="text-gray-300">Service Website</div>
             <input
               className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
@@ -146,7 +145,7 @@ const Service = () => {
               {error}
             </div>
           )}
-          <SubmitButton disabled={isSubmitting} text="Register"/>
+          <SubmitButton disabled={isSubmitting} text="Register Service"/>
         </form>
       )}
     </Formik>

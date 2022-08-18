@@ -7,8 +7,8 @@ const Register = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
   return (
-    <div className="flex flex-col p-8 pt-0">
-      <div className="flex mb-8 gap-2">
+    <div className="flex flex-col p-8">
+      <div className="flex mb-8 gap-2 h-[35px]">
         <button
           className={`${
             searchParams.get("type") === "provider"
