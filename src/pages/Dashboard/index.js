@@ -10,6 +10,10 @@ const Dashboard = () => {
 
   const [copied, setCopied] = React.useState(false);
 
+  React.useState(() => {
+    console.log(user)
+  }, [user])
+
   return (
     <div className="flex w-full md:w-1/2 flex-col max-w-3xl text-gray-200">
       <div className="bg-dark rounded-md p-8">
@@ -58,7 +62,7 @@ const Dashboard = () => {
             </div>
           </div>
         )}
-        {user.type === "SERVICE" && (
+        {user.type === "REQUESTER" && (
           <div className="mt-4">
             <div className=" text-gray-200 flex gap-8 items-center">
               <div className="text-gray-200 flex flex-col">
