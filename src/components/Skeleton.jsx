@@ -19,7 +19,7 @@ const widths = [
   0.5546875, 0.2765625, 0.5546875, 0.5546875, 0.221875, 0.240625, 0.5, 0.221875,
   0.8328125, 0.5546875, 0.5546875, 0.5546875, 0.5546875, 0.3328125, 0.5,
   0.2765625, 0.5546875, 0.5, 0.721875, 0.5, 0.5, 0.5, 0.3546875, 0.259375,
-  0.353125, 0.5890625,
+  0.353125, 0.5890625
 ];
 const avg = 0.5279276315789471;
 
@@ -36,7 +36,7 @@ export const Skeleton = ({ size, text }) => {
   return (
     <div
       style={{
-        width: text ? `${measureText(text.toString(), 16).toFixed()}px` : "",
+        width: text ? `${measureText(text.toString(), 16).toFixed()}px` : ""
       }}
       className={`w-20 h-4 bg-banano-gray-dark animate-pulse rounded ${
         size ? size : ""

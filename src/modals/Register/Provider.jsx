@@ -39,7 +39,7 @@ const Provider = () => {
             type: "provider",
             email: values.email,
             password: values.password,
-            banAddress: values.banAddress,
+            banAddress: values.banAddress
           });
           // FETCH USER AND SET IT USING setUser() TO LOG USER IN
           navigate("/dashboard");
@@ -56,7 +56,7 @@ const Provider = () => {
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting,
+        isSubmitting
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit} className="w-full">

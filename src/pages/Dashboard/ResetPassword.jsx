@@ -47,7 +47,7 @@ const ResetPassword = () => {
           handleSubmit,
           isSubmitting,
           isValid,
-          dirty,
+          dirty
         }) => (
           <form onSubmit={handleSubmit} className="">
             <div className="mb-2">

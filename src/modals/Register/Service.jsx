@@ -17,7 +17,7 @@ const Service = () => {
         password: "",
         banAddress: "",
         serviceName: "",
-        serviceWebsite: "",
+        serviceWebsite: ""
       }}
       validate={(values) => {
         const errors = {};
@@ -47,7 +47,7 @@ const Service = () => {
             password: values.password,
             banAddress: values.banAddress,
             serviceName: values.serviceName,
-            serviceWebsite: values.serviceWebsite,
+            serviceWebsite: values.serviceWebsite
           });
           // FETCH USER AND SET IT USING setUser() TO LOG USER IN
           navigate("/dashboard");
@@ -64,7 +64,7 @@ const Service = () => {
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting,
+        isSubmitting
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit} className="w-full">

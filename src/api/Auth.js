@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client';
-import { apolloClient } from 'apollo';
+import { gql } from "@apollo/client";
+import { apolloClient } from "apollo";
 
 export const LOGIN_MUTATION = gql`
   mutation login($input: LoginInput!) {
@@ -28,9 +28,9 @@ const Auth = {
       variables: {
         input: {
           email,
-          password,
-        },
-      },
+          password
+        }
+      }
     });
     if (resp.data.login) {
       return resp.data.login;
@@ -43,7 +43,7 @@ const Auth = {
     password,
     banAddress,
     serviceName,
-    serviceWebsite,
+    serviceWebsite
   }) => true,
   changePassword: async (oldPassword, newPassword) => true,
 
@@ -54,15 +54,15 @@ const Auth = {
       variables: {
         input: {
           email,
-          token,
-        },
-      },
+          token
+        }
+      }
     });
     if (resp.data.verifyEmail) {
       return resp.data.verifyEmail;
     }
-    throw new Error('Unknown error verifying email');
-  },
+    throw new Error("Unknown error verifying email");
+  }
 };
 
 export default Auth;

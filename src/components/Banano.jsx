@@ -11,7 +11,7 @@ export const Banano = ({ width }) => {
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid meet"
       style={{
-        minWidth: "18px",
+        minWidth: "18px"
       }}
     >
       <g

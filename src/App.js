@@ -1,17 +1,17 @@
-import React, { Suspense } from 'react';
-import { Routes, Route, useSearchParams, Navigate } from 'react-router-dom';
+import React, { Suspense } from "react";
+import { Routes, Route, useSearchParams, Navigate } from "react-router-dom";
 
-import Header from 'components/Header';
+import Header from "components/Header";
 
-import Modal from 'components/Modal';
-import Login from 'modals/Login';
-import Register from 'modals/Register';
+import Modal from "components/Modal";
+import Login from "modals/Login";
+import Register from "modals/Register";
 
-import { useUserStore } from 'stores';
-import VerifyEmail from 'pages/VerifyEmail';
+import { useUserStore } from "stores";
+import VerifyEmail from "pages/VerifyEmail";
 
-const Main = React.lazy(() => import('./pages/Main'));
-const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const Main = React.lazy(() => import("./pages/Main"));
+const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 
 const ProtectedRoute = ({ user, children }) => {
   if (!user) {
@@ -32,10 +32,10 @@ function App() {
         // LOADER HERE IN THE FUTURE.
         fallback={<div className="bg-primary w-full h-full"></div>}
       >
-        {!user && searchParams.get('modal') === 'login' && (
+        {!user && searchParams.get("modal") === "login" && (
           <Modal modal={<Login />} />
         )}
-        {searchParams.get('modal') === 'register' && (
+        {searchParams.get("modal") === "register" && (
           <Modal modal={<Register />} />
         )}
         <div className="w-full h-full bg-primary flex justify-center items-center px-4 overflow-y-auto">

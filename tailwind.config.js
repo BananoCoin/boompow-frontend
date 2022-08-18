@@ -8,7 +8,7 @@ module.exports = {
         dark: "#151517",
         accent: {
           DEFAULT: "#ddb242",
-          secondary: "#ebbf3d",
+          secondary: "#ebbf3d"
         },
         // * BANANO PRESS KIT
         banano: {
@@ -16,18 +16,18 @@ module.exports = {
           green: "#4CBF4B",
           gray: {
             DEFAULT: "#2A2A2E",
-            dark: "#212124",
-          },
-        },
+            dark: "#212124"
+          }
+        }
       },
       // SHOULD BE FILSON PRO, BUT I DON'T HAVE ACCESS TO THAT.
       fontFamily: {
-        montserrat: ["Montserrat", "sans-serif"],
-      },
-    },
+        montserrat: ["Montserrat", "sans-serif"]
+      }
+    }
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: []
 };

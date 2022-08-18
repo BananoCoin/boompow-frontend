@@ -13,7 +13,7 @@ const Header = () => {
     <div
       className="shrink-0 flex px-4 justify-center items-center w-full h-20 bg-dark z-10"
       style={{
-        boxShadow: "rgb(0 0 0 / 15%) 0px 10px 12px",
+        boxShadow: "rgb(0 0 0 / 15%) 0px 10px 12px"
       }}
     >
       <div className="h-full w-full max-w-7xl flex items-center justify-between">

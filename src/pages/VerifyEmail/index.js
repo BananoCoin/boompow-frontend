@@ -1,6 +1,6 @@
-import Auth from 'api/Auth';
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import Auth from "api/Auth";
+import React from "react";
+import { useParams } from "react-router-dom";
 
 const VerifyEmail = () => {
   const [success, setSuccess] = React.useState(null);
@@ -24,10 +24,10 @@ const VerifyEmail = () => {
   return (
     <div className="text-gray-100">
       {/* STILL LOADING */}
-      {success === null && 'Verifying your email address...'}
-      {success === true && 'Your email address has been successfully verified!'}
+      {success === null && "Verifying your email address..."}
+      {success === true && "Your email address has been successfully verified!"}
       {success === false &&
-        'Something went wrong verifying your email address...The link may have expired.'}
+        "Something went wrong verifying your email address...The link may have expired."}
     </div>
   );
 };

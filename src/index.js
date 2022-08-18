@@ -10,6 +10,7 @@ import { apolloClient } from "apollo";
 import { ApolloProvider } from "@apollo/client";
 
 const container = document.getElementById("root");
+
 const root = createRoot(container);
 root.render(
   <ApolloProvider client={apolloClient()}>
