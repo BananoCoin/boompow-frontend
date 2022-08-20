@@ -7,7 +7,11 @@ const Services = () => {
   const refreshServices = async () => {
     try {
       const services = await Stats.services();
-      setServices(services);
+      setServices(
+        services.sort((a, b) =>
+          Number(a.amountOfRequests) > Number(b.amountOfRequests) ? -1 : 1
+        )
+      );
       console.log(services);
     } catch (e) {
       // TODO: HANDLE ERROR
