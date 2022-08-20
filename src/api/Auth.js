@@ -29,6 +29,7 @@ export const GET_USER_QUERY = gql`
 `;
 
 const Auth = {
+  // ACCOUNT
   login: async (email, password) => {
     const resp = await apolloClient().mutate({
       mutation: LOGIN_MUTATION,
@@ -52,8 +53,8 @@ const Auth = {
     serviceName,
     serviceWebsite
   }) => true,
-  changePassword: async (oldPassword, newPassword) => true,
 
+  // EMAIL VERIFICATION
   resendVerificationEmail: async () => true,
   verifyEmail: async (email, token) => {
     const resp = await apolloClient().query({
@@ -71,7 +72,11 @@ const Auth = {
     throw new Error("Unknown error verifying email");
   },
 
-  sendRecoveryEmail: async (email) => true
+  // PASSWORD RECOVERY
+  sendRecoveryEmail: async (email) => true,
+  checkRecoveryToken: async (email, token) => true,
+  // ! SENDING TOKEN LIKE THIS MIGHT BE UNSAFE?
+  recoverPassword: async (email, token, newPassword) => true
 };
 
 export default Auth;

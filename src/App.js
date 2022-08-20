@@ -14,6 +14,7 @@ import Services from "pages/Services";
 import VerifyEmail from "pages/VerifyEmail";
 import Install from "pages/Install";
 import { useCookies } from "react-cookie";
+import PasswordRecovery from "pages/PasswordRecovery";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -67,6 +68,10 @@ function App() {
             <Route
               path="/verify_email/:email/:token"
               element={<VerifyEmail />}
+            />
+            <Route
+              path="/reset_password/:email/:token"
+              element={<PasswordRecovery />}
             />
             <Route path="*" element={<Main />} />
           </Routes>

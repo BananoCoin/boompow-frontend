@@ -4,7 +4,6 @@ import React from "react";
 import { useCookies } from "react-cookie";
 import { useQuery } from "@apollo/client";
 
-import ResetPassword from "./ResetPassword";
 import { Link, useNavigate } from "react-router-dom";
 
 const WarningSvg = () => (
