@@ -21,13 +21,16 @@ const Recover = () => {
 
           return errors;
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
           try {
             await Auth.sendRecoveryEmail(values.email);
+            // TODO: Let user know that email was sent.
+            resetForm();
           } catch (e) {
             setError("Unknown error occured, try again later");
+          } finally {
+            setSubmitting(false);
           }
-          setSubmitting(false);
         }}
       >
         {({
@@ -43,7 +46,7 @@ const Recover = () => {
             <div className="mb-8">
               <div className="text-gray-300">Email</div>
               <input
-                className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
+                className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}

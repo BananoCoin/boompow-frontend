@@ -43,8 +43,9 @@ const Login = () => {
             } else {
               setError("Unknown error occured, try again later");
             }
+          } finally {
+            setSubmitting(false);
           }
-          setSubmitting(false);
         }}
       >
         {({
@@ -60,7 +61,7 @@ const Login = () => {
             <div className="mb-4">
               <div className="text-gray-300">Email</div>
               <input
-                className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
+                className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -79,7 +80,7 @@ const Login = () => {
               <div className="text-gray-300">Password</div>
 
               <input
-                className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
+                className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}

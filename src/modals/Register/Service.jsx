@@ -53,8 +53,9 @@ const Service = () => {
           navigate("/dashboard");
         } catch (e) {
           setError(e.response?.data);
+        } finally {
+          setSubmitting(false);
         }
-        setSubmitting(false);
       }}
     >
       {({
@@ -70,7 +71,7 @@ const Service = () => {
           <div className="mb-4">
             <div className="text-gray-300">Email</div>
             <input
-              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
+              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -89,7 +90,7 @@ const Service = () => {
             <div className="text-gray-300">Password</div>
 
             <input
-              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
+              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
               value={values.password}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -107,7 +108,7 @@ const Service = () => {
           <div className="mb-4">
             <div className="text-gray-300">Service Name</div>
             <input
-              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
+              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
               value={values.serviceName}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -124,7 +125,7 @@ const Service = () => {
           <div className="mb-8">
             <div className="text-gray-300">Service Website</div>
             <input
-              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full"
+              className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
               value={values.serviceWebsite}
               onChange={handleChange}
               onBlur={handleBlur}
