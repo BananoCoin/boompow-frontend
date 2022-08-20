@@ -11,7 +11,7 @@ const GithubSvg = () => (
 
 const Install = () => {
   return (
-    <div className="flex md:justify-center w-full h-full w-full flex-col py-8 max-w-4xl text-gray-200">
+    <div className="flex md:justify-center w-full h-full flex-col py-8 max-w-4xl text-gray-200">
       <div className="font-semibold text-3xl mb-4">Installation</div>
       <div className="text-md mb-2">
         1. Download the latest BoomPOW release from GitHub:
