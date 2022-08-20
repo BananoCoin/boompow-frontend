@@ -1,5 +1,6 @@
 import React from "react";
 import { formatBan } from "components/Banano";
+import { Skeleton } from "components/Skeleton";
 
 const TopContributors = ({ topContributors }) => {
   return (
@@ -45,7 +46,33 @@ const TopContributors = ({ topContributors }) => {
             })}
           </React.Fragment>
         ) : (
-          <React.Fragment></React.Fragment>
+          <React.Fragment>
+            {new Array(10).fill({}).map((_, index) => {
+              return (
+                <div
+                  key={index}
+                  className="py-4 border-b border-banano-gray-dark first:border-t last:border-b p-4 flex justify-between"
+                >
+                  <div className="flex">
+                    <Skeleton size="rounded-full bg-banano-gray-dark h-[48px] w-[48px]" />
+                    <div className="flex flex-col ml-4 justify-between">
+                      <div className="text-gray-300">
+                        <Skeleton text="ban_1boompow1..." />
+                      </div>
+                      <div>
+                        <Skeleton text="BAN 10,000.00" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-gray-400 font-medium">
+                    <div>
+                      <Skeleton text="1st" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </React.Fragment>
         )}
       </div>
     </div>
