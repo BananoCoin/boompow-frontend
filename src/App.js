@@ -16,6 +16,9 @@ import Install from "pages/Install";
 import { useCookies } from "react-cookie";
 import PasswordRecovery from "pages/PasswordRecovery";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 
@@ -33,7 +36,16 @@ function App() {
 
   return (
     <div className="h-screen w-screen flex flex-col">
+      <ToastContainer
+        autoClose={2500}
+        theme="dark"
+        toastStyle={{
+          backgroundColor: "#151517"
+        }}
+      />
+
       <Header />
+
       <Suspense
         fallback={
           <div className="bg-primary w-full h-full flex justify-center items-center">
@@ -45,7 +57,6 @@ function App() {
           <Modal modal={<Login />} title="Log In" />
         )}
 
-        {/* PASSWORD RECOVERY */}
         {!cookies.token && searchParams.get("modal") === "recover" && (
           <Modal modal={<Recover />} title="Recover Password" />
         )}

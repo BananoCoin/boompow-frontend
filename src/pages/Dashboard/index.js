@@ -6,6 +6,8 @@ import { useQuery } from "@apollo/client";
 
 import { Link, useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 const WarningSvg = () => (
   <svg
     className="w-5 h-5"
@@ -68,7 +70,14 @@ const Dashboard = () => {
                 <button
                   className="flex items-center ml-4 px-1 py-1 rounded hover:bg-dark/75 transition-colors bg-dark text-sm text-accent hover:text-accent-secondary"
                   onClick={async () => {
-                    await Auth.resendVerificationEmail();
+                    try {
+                      await Auth.resendVerificationEmail();
+                      toast.success("Successfully sent verification email!");
+                    } catch (e) {
+                      toast.error(
+                        "Something went wrong. Please try again later."
+                      );
+                    }
                   }}
                 >
                   <WarningSvg />

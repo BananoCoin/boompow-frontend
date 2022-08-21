@@ -1,9 +1,9 @@
 import { Formik } from "formik";
 import React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { useSearchParams } from "react-router-dom";
 import Auth from "api/Auth.js";
 import SubmitButton from "components/SubmitButton";
+import { toast } from "react-toastify";
 
 const Recover = () => {
   const [error, setError] = React.useState("");
@@ -24,7 +24,7 @@ const Recover = () => {
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           try {
             await Auth.sendRecoveryEmail(values.email);
-            // TODO: Let user know that email was sent.
+            toast.success("Successfully sent password recovery email!");
             resetForm();
           } catch (e) {
             setError("Unknown error occured, try again later");
