@@ -1,9 +1,10 @@
 import React from "react";
 import Stats from "api/Stats";
 import { Skeleton } from "components/Skeleton";
+import { useMainStore } from "stores";
 
 const Services = () => {
-  const [services, setServices] = React.useState(null);
+  const { services, setServices } = useMainStore();
 
   const refreshServices = async () => {
     try {
@@ -15,8 +16,7 @@ const Services = () => {
       );
       console.log(services);
     } catch (e) {
-      // TODO: HANDLE ERROR
-      setServices([]);
+      // TODO: HANDLE ERROR. CURRENTLY THE TABLE WILL APPEAR TO BE LOADING FOREVER
     }
   };
 
@@ -51,7 +51,7 @@ const Services = () => {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {new Array(30).fill({}).map((_, index) => {
+              {new Array(20).fill({}).map((_, index) => {
                 return (
                   <tr className="[&>*]:first:pt-4 [&>*]:py-1 border-b-1 border-banano-yellow/25 [&>*]:px-1 [&>*]:md:px-12">
                     <td>

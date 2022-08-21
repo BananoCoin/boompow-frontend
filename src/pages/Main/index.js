@@ -9,6 +9,7 @@ import TotalRegistered from "./TotalRegistered";
 import TotalConnected from "./TotalConnected";
 
 import { STATS_SUBSCRIPTION } from "api/Stats.js";
+import { useMainStore } from "stores";
 
 const formatTopContributors = (pTopContributors) => {
   let topContributors = [];
@@ -21,7 +22,7 @@ const formatTopContributors = (pTopContributors) => {
 const Main = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const [stats, setStats] = React.useState(null);
+  const { stats, setStats } = useMainStore();
 
   const { data, loading } = useSubscription(STATS_SUBSCRIPTION);
   React.useEffect(() => {
