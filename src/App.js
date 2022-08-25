@@ -9,6 +9,7 @@ import Loader from "components/Loader";
 import Login from "modals/Login";
 import Register from "modals/Register";
 import Recover from "modals/Recover";
+import ServiceToken from "modals/ServiceToken";
 
 import Services from "pages/Services";
 import VerifyEmail from "pages/VerifyEmail";
@@ -64,6 +65,11 @@ function App() {
         {searchParams.get("modal") === "register" && (
           <Modal modal={<Register />} title="Register" />
         )}
+
+        {searchParams.get("modal") === "service_token" && (
+          <Modal modal={<ServiceToken />} title="Service Token" />
+        )}
+
         <div className="w-full h-full bg-primary flex justify-center items-center px-4 overflow-y-auto">
           <Routes>
             <Route path="/install" element={<Install />} />

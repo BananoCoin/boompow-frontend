@@ -17,6 +17,12 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
+export const SERVICE_TOKEN_MUTATION = gql`
+  mutation generateOrGetServiceToken {
+    generateOrGetServiceToken
+  }
+`;
+
 export const RESET_PASSWORD_MUTATION = gql`
   mutation resetPassword($input: ResetPasswordInput!) {
     resetPassword(input: $input)
@@ -44,6 +50,7 @@ export const GET_USER_QUERY = gql`
       type
       emailVerified
       email
+      canRequestWork
     }
   }
 `;
@@ -139,12 +146,24 @@ const Auth = {
         }
       }
     });
-    console.log(resp);
-    console.log(resp.data);
     if (resp.data?.changePassword) {
       return resp.data?.changePassword;
     }
     throw new Error("Unknown error recovering password");
+  },
+  generateServiceToken: async (token) => {
+    const resp = await apolloClient().mutate({
+      mutation: SERVICE_TOKEN_MUTATION,
+      context: {
+        headers: {
+          Authorization: token
+        }
+      }
+    });
+    if (resp.data?.generateOrGetServiceToken) {
+      return resp.data?.generateOrGetServiceToken;
+    }
+    throw new Error("Unknown error generating service token");
   }
 };
 

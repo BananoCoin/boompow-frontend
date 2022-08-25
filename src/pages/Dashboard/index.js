@@ -4,7 +4,7 @@ import React from "react";
 import { useCookies } from "react-cookie";
 import { useQuery } from "@apollo/client";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
@@ -26,6 +26,7 @@ const WarningSvg = () => (
 );
 
 const Dashboard = () => {
+  let [searchParams, setSearchParams] = useSearchParams();
   const [copied, setCopied] = React.useState(false);
   const [cookies, setCookie] = useCookies(["token"]);
   const { loading, error, data } = useQuery(GET_USER_QUERY, {
@@ -59,7 +60,36 @@ const Dashboard = () => {
 
         <div className="text-gray-200 flex flex-col">
           <span className="text-gray-400">Account Type</span>
-          <span className="flex items-center">{user.type.toUpperCase()}</span>
+          <div className="flex">
+            <span className="flex items-center">{user.type.toUpperCase()}</span>
+            <div>
+              {user.emailVerified &&
+                user.canRequestWork &&
+                user.type.toUpperCase() === "REQUESTER" && (
+                  <button
+                    className="flex items-center ml-4 px-1 py-1 rounded hover:bg-dark/75 transition-colors bg-dark text-sm text-accent hover:text-accent-secondary"
+                    onClick={async () => {
+                      try {
+                        const token = await Auth.generateServiceToken(
+                          cookies.token
+                        );
+                        setSearchParams("?modal=service_token&token=" + token);
+                      } catch (e) {
+                        console.log(e);
+                        toast.error(
+                          "Something went wrong. Please try again later."
+                        );
+                      }
+                    }}
+                  >
+                    <WarningSvg />
+                    <span className="ml-1">
+                      Generate Service Token (For Work Generation)
+                    </span>
+                  </button>
+                )}
+            </div>
+          </div>
         </div>
         <div className=" text-gray-200 mt-4 flex flex-col">
           <span className="text-gray-400 mr-2">Email</span>

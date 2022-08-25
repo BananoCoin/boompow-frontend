@@ -32,7 +32,7 @@ const Modal = ({ modal, title }) => {
       <div
         id="modalContainer"
         ref={ref}
-        className="bg-dark rounded-lg shadow-lg max-w-[400px] w-11/12"
+        className="bg-dark rounded-lg shadow-lg max-w-[500px] w-11/12"
       >
         <div className="w-full flex flex-col">
           <div className="w-full flex justify-between items-center p-2 sm:rounded-t-xl">
