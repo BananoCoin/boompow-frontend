@@ -1,11 +1,31 @@
 import { gql } from "@apollo/client";
 import { apolloClient } from "apollo";
 
+export const CREATE_USER_MUTATION = gql`
+  mutation createUser($input: UserInput!) {
+    createUser(input: $input) {
+      id
+    }
+  }
+`;
+
 export const LOGIN_MUTATION = gql`
   mutation login($input: LoginInput!) {
     login(input: $input) {
       token
     }
+  }
+`;
+
+export const RESET_PASSWORD_MUTATION = gql`
+  mutation resetPassword($input: ResetPasswordInput!) {
+    resetPassword(input: $input)
+  }
+`;
+
+export const CHANGE_PASSWORD_MUTATION = gql`
+  mutation changePassword($input: ChangePasswordInput!) {
+    changePassword(input: $input)
   }
 `;
 
@@ -46,13 +66,31 @@ const Auth = {
     throw new Error(`Unknown error processing login`);
   },
   register: async ({
-    serviceType,
+    type,
     email,
     password,
     banAddress,
     serviceName,
     serviceWebsite
-  }) => true,
+  }) => {
+    const resp = await apolloClient().mutate({
+      mutation: CREATE_USER_MUTATION,
+      variables: {
+        input: {
+          type,
+          email,
+          password,
+          banAddress,
+          serviceName,
+          serviceWebsite
+        }
+      }
+    });
+    if (resp.data?.createUser) {
+      return resp.data.createUser;
+    }
+    throw new Error(`Unknown error processing registration`);
+  },
 
   // EMAIL VERIFICATION
   resendVerificationEmail: async () => true,
@@ -73,10 +111,41 @@ const Auth = {
   },
 
   // PASSWORD RECOVERY
-  sendRecoveryEmail: async (email) => true,
-  checkRecoveryToken: async (email, token) => true,
-  // ! SENDING TOKEN LIKE THIS MIGHT BE UNSAFE?
-  recoverPassword: async (email, token, newPassword) => true
+  sendRecoveryEmail: async (email) => {
+    const resp = await apolloClient().mutate({
+      mutation: RESET_PASSWORD_MUTATION,
+      variables: {
+        input: {
+          email
+        }
+      }
+    });
+    if (resp.data) {
+      return true;
+    }
+    throw new Error("Unknown error verifying email");
+  },
+  recoverPassword: async (token, newPassword) => {
+    const resp = await apolloClient().mutate({
+      mutation: CHANGE_PASSWORD_MUTATION,
+      variables: {
+        input: {
+          newPassword
+        }
+      },
+      context: {
+        headers: {
+          Authorization: token
+        }
+      }
+    });
+    console.log(resp);
+    console.log(resp.data);
+    if (resp.data?.changePassword) {
+      return resp.data?.changePassword;
+    }
+    throw new Error("Unknown error recovering password");
+  }
 };
 
 export default Auth;

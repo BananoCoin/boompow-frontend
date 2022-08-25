@@ -33,7 +33,8 @@ const Main = () => {
       totalPaidBanano: data?.stats?.totalPaidBanano,
       registeredServiceCount: data?.stats?.registeredServiceCount,
       topContributors:
-        data?.stats?.top10 && formatTopContributors(data?.stats?.top10)
+        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
+      services: data?.stats?.services
     });
   }, [data]);
 

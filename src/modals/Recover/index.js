@@ -24,7 +24,9 @@ const Recover = () => {
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           try {
             await Auth.sendRecoveryEmail(values.email);
-            toast.success("Successfully sent password recovery email!");
+            toast.success(
+              "If you have an account, you will receive an email shortly with reset password instructions."
+            );
             resetForm();
           } catch (e) {
             setError("Unknown error occured, try again later");

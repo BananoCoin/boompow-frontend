@@ -4,6 +4,8 @@ import { useCookies } from "react-cookie";
 import { Formik } from "formik";
 import Auth from "api/Auth";
 import SubmitButton from "components/SubmitButton";
+import { toast } from "react-toastify";
+import { ApolloError } from "@apollo/client";
 
 const Service = () => {
   let navigate = useNavigate();
@@ -41,18 +43,25 @@ const Service = () => {
       }}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          await Auth.register({
-            type: "provider",
+          const resp = await Auth.register({
+            type: "REQUESTER",
             email: values.email,
             password: values.password,
-            banAddress: values.banAddress,
             serviceName: values.serviceName,
             serviceWebsite: values.serviceWebsite
           });
-          // FETCH USER AND SET IT USING setUser() TO LOG USER IN
+          if (resp.id) {
+            toast.success(
+              "You have successfully registered. Please check your email for a confirmation link. Once you have verified your email, you will be reviewed by an admin before you may start using the service."
+            );
+          }
           navigate("/dashboard");
         } catch (e) {
-          setError(e.response?.data);
+          if (e instanceof ApolloError) {
+            setError(e.message.charAt(0).toUpperCase() + e.message.slice(1));
+          } else {
+            setError("Unknown error occured, try again later");
+          }
         } finally {
           setSubmitting(false);
         }

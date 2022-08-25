@@ -4,8 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { Formik } from "formik";
 import SubmitButton from "components/SubmitButton";
+import { ApolloError } from "@apollo/client";
 
-const NewPasswordForm = ({ email, token, setSuccess }) => {
+const NewPasswordForm = ({ token, setSuccess }) => {
   // This is for error with submitting password change.
   const [error, setError] = React.useState(false);
 
@@ -32,10 +33,14 @@ const NewPasswordForm = ({ email, token, setSuccess }) => {
       }}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          await Auth.recoverPassword(email, token, values.password);
-          setSuccess(true);
+          const resp = await Auth.recoverPassword(token, values.password);
+          setSuccess(resp);
         } catch (e) {
-          setError(e.response?.data);
+          if (e instanceof ApolloError) {
+            setError(e.message.charAt(0).toUpperCase() + e.message.slice(1));
+          } else {
+            setError("Unknown error occured, try again later");
+          }
         } finally {
           setSubmitting(false);
         }
@@ -106,53 +111,23 @@ const NewPasswordForm = ({ email, token, setSuccess }) => {
 
 const PasswordRecovery = () => {
   const params = useParams();
-  const { token, email } = params;
-
-  // Token and email are valid.
-  const [canReset, setCanReset] = React.useState(null);
+  const { token } = params;
 
   // Updated password successfully
   const [success, setSuccess] = React.useState(null);
 
-  const checkToken = async () => {
-    try {
-      const isValidToken = await Auth.checkRecoveryToken(email, token);
-      if (!isValidToken) throw new Error();
-
-      setCanReset(true);
-    } catch (e) {
-      console.error(e);
-      setCanReset(false);
-    }
-  };
-
-  React.useEffect(() => {
-    checkToken();
-  }, []);
-
   return (
     <div className="text-gray-100 w-full flex justify-center items-center">
       {/* STILL LOADING */}
-      {canReset === null && "Checking token..."}
-      {canReset === true && (
-        <React.Fragment>
-          {!success ? (
-            <div className="w-full max-w-[300px]">
-              <NewPasswordForm
-                email={email}
-                token={token}
-                setSuccess={setSuccess}
-              />
-            </div>
-          ) : (
-            <span className="text-green-400">
-              Successfully changed password!
-            </span>
-          )}
-        </React.Fragment>
-      )}
-      {canReset === false &&
-        "Invalid token. The link may have already expired."}
+      <React.Fragment>
+        {!success ? (
+          <div className="w-full max-w-[300px]">
+            <NewPasswordForm token={token} setSuccess={setSuccess} />
+          </div>
+        ) : (
+          <span className="text-green-400">Successfully changed password!</span>
+        )}
+      </React.Fragment>
     </div>
   );
 };

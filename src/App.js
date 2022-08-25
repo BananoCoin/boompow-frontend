@@ -81,7 +81,7 @@ function App() {
               element={<VerifyEmail />}
             />
             <Route
-              path="/reset_password/:email/:token"
+              path="/reset_password/:token"
               element={<PasswordRecovery />}
             />
             <Route path="*" element={<Main />} />
