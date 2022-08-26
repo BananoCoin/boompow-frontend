@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-redirect
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^/(.*)$ https://boompow.banano.cc/$1 permanent;
+spec:
+  tls:
+    - hosts:
+        - bpow.banano.cc
+      secretName: bpow-banano-cc-secret
+  rules:
+    - host: bpow.banano.cc
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: boompow-frontend
+                port:
+                  number: 3000
