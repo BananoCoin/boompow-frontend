@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boompow-frontend-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      real_ip_header CF-Connecting-IP;
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+spec:
+  tls:
+    - hosts:
+        - boompow.banano.cc
+      secretName: boompow-banano-cc-server-secret
+  rules:
+    - host: boompow.banano.cc
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: boompow-frontend
+                port:
+                  number: 3000

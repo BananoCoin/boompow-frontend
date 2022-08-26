@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: boompow-frontend
+  labels:
+    app: boompow-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: boompow-frontend
+  template:
+    metadata:
+      labels:
+        app: boompow-frontend
+    spec:
+      containers:
+        - name: boompow-frontend
+          image: replaceme
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: "Always"

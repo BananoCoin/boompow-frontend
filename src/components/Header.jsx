@@ -2,6 +2,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import logo from "images/logo.svg";
 import { useCookies } from "react-cookie";
+import { apolloClient } from "apollo";
 
 const Header = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -45,6 +46,7 @@ const Header = () => {
             onClick={(e) => {
               setCookie("token", "");
               navigate("/");
+              apolloClient().resetStore();
             }}
           >
             Log Out

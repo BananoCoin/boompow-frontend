@@ -25,7 +25,13 @@ const TopContributors = ({ topContributors }) => {
                     />
                     <div className="flex flex-col ml-4 justify-between">
                       <div className="text-gray-300">
-                        {c.banAddress.substr(0, 13)}...
+                        <a
+                          href={`https://creeper.banano.cc/account/${c.banAddress}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {c.banAddress.substr(0, 13)}...
+                        </a>
                       </div>
                       <div>{formatBan(c.totalPaidBanano)}</div>
                     </div>

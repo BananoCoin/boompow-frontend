@@ -19,12 +19,19 @@ const ServiceToken = () => {
         <div className="text-gray-400 text-sm">
           You should have received an email with instructions on how to use it
           as part of the registration process. The simplest way is to use
-          Pippin, where you can just set it in the environment as{" "}
+          <a
+            href="https://github.com/appditto/pippin_nano_wallet/tree/master/pippin"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Pippin
+          </a>
+          , where you can just set it in the environment as{" "}
           <code>BPOW_TOKEN</code>
         </div>
         <br />
-        <div class="flex">
-          <div class="relative w-full">
+        <div className="flex">
+          <div className="relative w-full">
             <input
               className="bg-banano-gray p-2 rounded-md text-gray-200 w-full placeholder:text-sm"
               value={searchParams.get("token")}
@@ -34,7 +41,7 @@ const ServiceToken = () => {
             />
             <button
               type="copy"
-              class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-banano-yellow rounded-r-lg border border-banano-yellow hover:border-accent-secondary hover:bg-accent-secondary focus:ring-4"
+              className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-banano-yellow rounded-r-lg border border-banano-yellow hover:border-accent-secondary hover:bg-accent-secondary focus:ring-4"
               onClick={() => {
                 copy(searchParams.get("token"));
                 toast.success("Token copied to clipboard");
@@ -42,7 +49,7 @@ const ServiceToken = () => {
             >
               <svg
                 aria-hidden="true"
-                class="w-5 h-5"
+                className="w-5 h-5"
                 fill="black"
                 stroke="currentColor"
                 viewBox="0 0 330 330"

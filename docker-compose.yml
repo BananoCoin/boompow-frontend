@@ -1,23 +1,23 @@
 version: "3.9"
 services:
-    app:
-        container_name: boompow_frontend
-        ports:
-            - 127.0.0.1:3002:3002
-        environment:
-            - PORT=3002
-            - REACT_APP_GraphQLURL=http://localhost:8080/graphql
-        build:
-            context: .
-            dockerfile: Dockerfile.dev
-        volumes:
-            - $PWD:/app:cached
-        restart: on-failure
-        entrypoint: /bin/zsh
-        stdin_open: true
-        tty: true
-        networks: ["app-network"]
+  app:
+    container_name: boompow_frontend
+    ports:
+      - 127.0.0.1:3002:3002
+    environment:
+      - PORT=3002
+      # - REACT_APP_GraphQLURL=http://localhost:8080/graphql
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - $PWD:/app:cached
+    restart: on-failure
+    entrypoint: /bin/zsh
+    stdin_open: true
+    tty: true
+    networks: ["app-network"]
 
 networks:
-    app-network:
-        driver: bridge
+  app-network:
+    driver: bridge

@@ -5,6 +5,9 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 
+const baseUrl = () =>
+  process.env.REACT_APP_GraphQLURL || "https://boompow.banano.cc/graphql";
+
 const getWsUrl = (url) =>
   url.includes("http://")
     ? url.replace("http://", "ws://")
@@ -12,12 +15,12 @@ const getWsUrl = (url) =>
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: getWsUrl(process.env.REACT_APP_GraphQLURL)
+    url: getWsUrl(baseUrl())
   })
 );
 
 const httpLink = new HttpLink({
-  uri: `${process.env.REACT_APP_GraphQLURL}`
+  uri: baseUrl()
 });
 
 const splitLink = split(
