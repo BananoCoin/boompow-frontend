@@ -5,3 +5,4 @@ resources:
   - deployment.yaml
   - svc.yaml
   - ingress.yaml
+  - redirect_ingress.yaml
