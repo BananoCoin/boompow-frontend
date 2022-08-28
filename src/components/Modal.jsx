@@ -5,15 +5,23 @@ const Modal = ({ modal, title }) => {
   const ref = React.useRef();
   let [searchParams, setSearchParams] = useSearchParams();
 
+  const [didClickDown, setClickedDown] = React.useState(false);
+
   return (
     <div
       className="z-50 absolute w-screen h-screen top-0 left-0 right-0 bottom-0 flex justify-center items-center"
       style={{ backgroundColor: "rgba(0,0,0,0.40)" }}
       // CLOSE MODAL ON CLICK OUTSIDE
-      onClick={(e) => {
+      onMouseUp={(e) => {
         if (e.target.lastChild?.id !== "modalContainer") return;
+        if (!didClickDown) return;
+        setClickedDown(false);
         e.stopPropagation();
         setSearchParams("");
+      }}
+      onMouseDown={(e) => {
+        if (e.target.lastChild?.id !== "modalContainer") return;
+        setClickedDown(true);
       }}
     >
       <div
