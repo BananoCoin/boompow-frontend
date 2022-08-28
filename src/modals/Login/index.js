@@ -1,8 +1,9 @@
+import { useNavigate, useSearchParams } from "react-router-dom";
+
+import { ApolloError } from "@apollo/client";
+import Auth from "api/Auth.js";
 import { Formik } from "formik";
 import React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import Auth from "api/Auth.js";
-import { ApolloError } from "@apollo/client";
 import SubmitButton from "components/SubmitButton";
 import { useCookies } from "react-cookie";
 
@@ -102,14 +103,16 @@ const Login = () => {
               </div>
             )}
             <SubmitButton disabled={isSubmitting} text="Log In" />
-            <button
-              className="w-full flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
-              onClick={() => {
-                setSearchParams("?modal=recover");
-              }}
-            >
-              I forgot my password
-            </button>
+            <div className="w-full flex justify-center">
+              <button
+                className="flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
+                onClick={() => {
+                  setSearchParams("?modal=recover");
+                }}
+              >
+                I forgot my password
+              </button>
+            </div>
           </form>
         )}
       </Formik>

@@ -1,7 +1,8 @@
+import { useNavigate, useParams } from "react-router-dom";
+
 import React from "react";
 import { Skeleton } from "components/Skeleton";
 import { useMainStore } from "stores";
-import { useNavigate, useParams } from "react-router-dom";
 
 const Services = () => {
   const { stats } = useMainStore();
@@ -15,12 +16,12 @@ const Services = () => {
   });
 
   return (
-    <div className="bg-dark p-2 rounded rounded-l-none w-full max-w-3xl h-5/6 overflow-y-scroll border-banano-yellow border-l-4">
+    <div className="bg-dark p-2 rounded rounded-l-none w-full max-w-xl h-5/6 overflow-y-scroll border-banano-yellow border-l-4">
       <table className="text-gray-300 table-auto w-full">
         <thead>
           <tr className="[&>*]:font-medium table-fixed [&>*]:py-2 border-b-2 border-banano-yellow/25 [&>*]:px-1 [&>*]:sm:px-3 text-left">
             <th>Name</th>
-            <th>Total Requests</th>
+            <th className="text-right whitespace-nowrap">Total Requests</th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +39,10 @@ const Services = () => {
                       {service.name}
                     </a>
                   </td>
-                  <td>{service.requests}</td>
+                  {/* Numerical data should be right-aligned for easier comparisons at a glance*/}
+                  <td className="text-right tabular-nums">
+                    {service.requests}
+                  </td>
                 </tr>
               );
             })}

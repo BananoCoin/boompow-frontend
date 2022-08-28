@@ -1,6 +1,12 @@
 import React from "react";
-import { formatBan } from "components/Banano";
 import { Skeleton } from "components/Skeleton";
+import { formatBan } from "components/Banano";
+
+// https://stackoverflow.com/a/39466341
+// Get Ordinal Suffix
+function nth(n) {
+  return ["st", "nd", "rd"][((((n + 90) % 100) - 10) % 10) - 1] || "th";
+}
 
 const TopContributors = ({ topContributors }) => {
   return (
@@ -36,15 +42,10 @@ const TopContributors = ({ topContributors }) => {
                       <div>{formatBan(c.totalPaidBanano)}</div>
                     </div>
                   </div>
-                  <div className="text-gray-400 font-medium">
+                  <div className="text-gray-400 font-medium tabular-nums">
                     <div>
-                      {index === 0
-                        ? "1st"
-                        : index === 1
-                        ? "2nd"
-                        : index === 2
-                        ? "3rd"
-                        : `${index + 1}th`}
+                      {index + 1}
+                      {nth(index + 1)}
                     </div>
                   </div>
                 </div>
