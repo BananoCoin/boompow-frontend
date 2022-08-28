@@ -1,9 +1,9 @@
+import Auth from "api/Auth.js";
 import { Formik } from "formik";
 import React from "react";
-import { useSearchParams } from "react-router-dom";
-import Auth from "api/Auth.js";
 import SubmitButton from "components/SubmitButton";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 
 const Recover = () => {
   const [error, setError] = React.useState("");
@@ -70,14 +70,16 @@ const Recover = () => {
               </div>
             )}
             <SubmitButton disabled={isSubmitting} text="Send Recovery Email" />
-            <button
-              className="w-full flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
-              onClick={() => {
-                setSearchParams("?modal=login");
-              }}
-            >
-              Go Back
-            </button>
+            <div className="w-full flex justify-center">
+              <button
+                className="flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
+                onClick={() => {
+                  setSearchParams("?modal=login");
+                }}
+              >
+                Go Back
+              </button>
+            </div>
           </form>
         )}
       </Formik>

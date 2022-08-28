@@ -1,10 +1,8 @@
-import { Formik } from "formik";
-import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Auth from "api/Auth.js";
-import SubmitButton from "components/SubmitButton";
-import { toast } from "react-toastify";
+
+import React from "react";
 import copy from "copy-to-clipboard";
+import { toast } from "react-toastify";
 
 const ServiceToken = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -80,14 +78,16 @@ const ServiceToken = () => {
         </div>
       </div>
 
-      <button
-        className="w-full flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
-        onClick={() => {
-          navigate("/dashboard");
-        }}
-      >
-        Go Back
-      </button>
+      <div className="w-full flex justify-center">
+        <button
+          className="flex justify-center items-center underline font-semibold text-sm text-gray-300/25 mt-4"
+          onClick={() => {
+            navigate("/dashboard");
+          }}
+        >
+          Go Back
+        </button>
+      </div>
     </div>
   );
 };
