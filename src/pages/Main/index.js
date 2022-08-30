@@ -39,7 +39,7 @@ const Main = () => {
   }, [data]);
 
   return (
-    <div className="w-full max-w-5xl h-full flex flex-col items-center text-gray-100 font-semibold text-2xl mt-16">
+    <div className="w-full max-w-5xl h-full flex flex-col items-center text-gray-100 font-semibold text-2xl">
       <div className="mb-6 flex gap-6 flex-col mt-8 md:mt-16 md:flex-row w-full justify-center items-center whitespace-nowrap">
         <TotalPaid amount={stats?.totalPaidBanano} />
         <TotalConnected amount={stats?.totalConnected} />
