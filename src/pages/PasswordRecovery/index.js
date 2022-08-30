@@ -117,7 +117,7 @@ const PasswordRecovery = () => {
   const [success, setSuccess] = React.useState(null);
 
   return (
-    <div className="text-gray-100 w-full flex justify-center items-center">
+    <div className="text-gray-100 h-full w-full flex justify-center items-center">
       {/* STILL LOADING */}
       <React.Fragment>
         {!success ? (

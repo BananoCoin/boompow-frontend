@@ -16,8 +16,8 @@ const Services = () => {
   });
 
   return (
-    <div className="bg-dark p-2 rounded rounded-l-none w-full max-w-xl h-5/6 overflow-y-scroll border-banano-yellow border-l-4">
-      <table className="text-gray-300 table-auto w-full">
+    <div className="bg-dark p-2 ounded rounded-l-none w-full max-w-xl h-5/6 overflow-y-scroll border-banano-yellow border-l-4 mt-6 mb-6">
+      <table className="text-gray-300 table-auto w-full my-2">
         <thead>
           <tr className="[&>*]:font-medium table-fixed [&>*]:py-2 border-b-2 border-banano-yellow/25 [&>*]:px-1 [&>*]:sm:px-3 text-left">
             <th>Name</th>

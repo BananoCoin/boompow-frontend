@@ -51,7 +51,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex w-full md:w-1/2 flex-col max-w-4xl text-gray-200">
+    <div className="flex h-full w-full justify-center items-center min-h-screen flex-col max-w-4xl text-gray-200 ">
       <div className="rounded-md p-8">
         <div className="text-gray-300 text-xl font-bold mb-6">
           ACCOUNT DASHBOARD
