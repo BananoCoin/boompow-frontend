@@ -22,7 +22,7 @@ const VerifyEmail = () => {
   }, []);
 
   return (
-    <div className="text-gray-100">
+    <div className="text-gray-100 h-full flex justify-center items-center">
       {/* STILL LOADING */}
       {success === null && "Verifying your email address..."}
       {success === true && "Your email address has been successfully verified!"}
