@@ -13,7 +13,7 @@ const Services = () => {
   const { stats } = useMainStore();
 
   return (
-    <div className="text-gray-200 bg-dark rounded-md rounded-l-none border-banano-yellow border-l-4 w-full md:w-1/2 drop-shadow-lg shadow-black">
+    <div className="text-gray-200 bg-dark rounded-md rounded-l-none border-banano-yellow border-l-4 w-full max-w-3xl drop-shadow-lg shadow-black">
       <div className="p-4 font-bold">Top Contributors</div>
       <div className="h-[700px] overflow-y-scroll">
         <div className="text-sm ">
@@ -40,7 +40,12 @@ const Services = () => {
                             target="_blank"
                             rel="noreferrer"
                           >
-                            {c.banAddress}
+                            <span className="sm:hidden">
+                              {c.banAddress.substr(0, 13)}...
+                            </span>
+                            <span className="hidden sm:block">
+                              {c.banAddress}
+                            </span>
                           </a>
                         </div>
                         <div>{formatBan(c.totalPaidBanano)}</div>
@@ -68,7 +73,12 @@ const Services = () => {
                       <Skeleton size="rounded-full bg-banano-gray-dark h-[48px] w-[48px]" />
                       <div className="flex flex-col ml-4 justify-between">
                         <div className="text-gray-300">
-                          <Skeleton text="ban_1boompow1..." />
+                          <span className="sm:hidden">
+                            <Skeleton text="ban_1boompow1..." />
+                          </span>
+                          <span className="hidden sm:block">
+                            <Skeleton text="ban_1boompow14irck1yauquqypt7afqrh8b6bbu5r93pc6hgbqs7z6o99frcuym" />
+                          </span>
                         </div>
                         <div>
                           <Skeleton text="BAN 10,000.00" />

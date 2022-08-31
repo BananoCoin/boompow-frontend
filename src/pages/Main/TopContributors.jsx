@@ -25,7 +25,7 @@ const TopContributors = ({ topContributors }) => {
       <div className="text-sm overflow-y-scroll h-[406px]">
         {topContributors ? (
           <React.Fragment>
-            {topContributors.slice(0, 25).map((c, index) => {
+            {topContributors.slice(0, 5).map((c, index) => {
               return (
                 <div
                   key={index}
