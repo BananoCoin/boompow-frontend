@@ -1,8 +1,8 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
+import { apolloClient } from "apollo";
 import logo from "images/logo.svg";
 import { useCookies } from "react-cookie";
-import { apolloClient } from "apollo";
 
 const Header = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <div
-      className="shrink-0 flex px-4 justify-center items-center w-full h-20 bg-dark z-10"
+      className="shrink-0 flex px-4 py-3 justify-center items-center w-full bg-dark z-10"
       style={{
         boxShadow: "rgb(0 0 0 / 15%) 0px 10px 12px"
       }}

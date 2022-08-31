@@ -19,34 +19,57 @@ const Main = () => {
         <TotalConnected amount={stats?.totalConnected} />
         <TotalRegistered amount={stats?.registeredServiceCount} />
       </div>
-      <div className="flex flex-col md:flex-row mt-2 pb-8 md:mt-24 md:justify-between max-w-4xl items-center">
+      <div className="flex flex-col md:flex-row mt-2 pb-8 md:mt-24 md:justify-between max-w-6xl items-center">
         <TopContributors topContributors={stats?.topContributors} />
-        <div className="mt-4 md:w-1/2">
-          <div className="text-center text-3xl mt-6 md:mt-0">
+        <div className="mt-4 md:w-7/12">
+          <div className="text-3xl mt-6 md:mt-0 font-bold">
             What is BoomPOW?
           </div>
-          <p className="text-base text-gray-300 mt-4 font-medium">
-            Banano transactions require a "proof of work" in order to be
-            broadcasted and confirmed on the network. BoomPOW lets you earn
-            bananos by generating proof of work using your computer. You may
-            also request PoW for your service, completely free of charge.
+          <p className="text-base text-gray-300 mt-4 font-normal">
+            BoomPOW lets you earn bananos by generating proof of work for the
+            Banano and Nano networks using your computer. If you are a
+            developer, you may also register a service to request PoW completely
+            free of charge.
           </p>
-          <div className="mt-12 text-center text-3xl">I'd Like To Register</div>
-          <div className="w-full flex justify-center items-center gap-4">
+          <div className="mt-4 w-full flex justify-start items-center gap-4 font-bold [&>*]:py-2 [&>*]:px-2 [&>*]:text-sm [&>*]:my-4 [&>*]:transition-colors [&>*]:rounded-md">
             <button
-              className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}
+              className={`bg-banano-yellow hover:bg-accent-secondary text-gray-900 flex justify-center items-center gap-1`}
               onClick={(e) => {
                 setSearchParams("?modal=register&type=provider");
               }}
             >
+              <svg
+                class="w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
               Register Provider
             </button>
             <button
-              className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}
+              className={`bg-banano-yellow hover:bg-accent-secondary text-gray-900 flex justify-center items-center gap-1`}
               onClick={(e) => {
                 setSearchParams("?modal=register&type=service");
               }}
             >
+              <svg
+                class="w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 5a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm14 1a1 1 0 11-2 0 1 1 0 012 0zM2 13a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2zm14 1a1 1 0 11-2 0 1 1 0 012 0z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
               Register Service
             </button>
           </div>
