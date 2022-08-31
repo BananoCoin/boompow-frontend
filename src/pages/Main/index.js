@@ -1,15 +1,12 @@
 import React from "react";
-
-import { useSubscription } from "@apollo/client";
-import { useSearchParams } from "react-router-dom";
-
+import { STATS_SUBSCRIPTION } from "api/Stats.js";
 import TopContributors from "./TopContributors";
+import TotalConnected from "./TotalConnected";
 import TotalPaid from "./TotalPaid";
 import TotalRegistered from "./TotalRegistered";
-import TotalConnected from "./TotalConnected";
-
-import { STATS_SUBSCRIPTION } from "api/Stats.js";
 import { useMainStore } from "stores";
+import { useSearchParams } from "react-router-dom";
+import { useSubscription } from "@apollo/client";
 
 const formatTopContributors = (pTopContributors) => {
   let topContributors = [];
@@ -57,9 +54,7 @@ const Main = () => {
             bananos by generating proof of work using your computer. You may
             also request PoW for your service, completely free of charge.
           </p>
-          <div className="mt-12 text-center text-3xl">
-            Great! I'd Like To Register
-          </div>
+          <div className="mt-12 text-center text-3xl">I'd Like To Register</div>
           <div className="w-full flex justify-center items-center gap-4">
             <button
               className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}
