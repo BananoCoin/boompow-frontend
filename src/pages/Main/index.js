@@ -1,46 +1,20 @@
 import React from "react";
-
-import { useSubscription } from "@apollo/client";
-import { useSearchParams } from "react-router-dom";
-
+import { STATS_SUBSCRIPTION } from "api/Stats.js";
 import TopContributors from "./TopContributors";
+import TotalConnected from "./TotalConnected";
 import TotalPaid from "./TotalPaid";
 import TotalRegistered from "./TotalRegistered";
-import TotalConnected from "./TotalConnected";
-
-import { STATS_SUBSCRIPTION } from "api/Stats.js";
 import { useMainStore } from "stores";
-
-const formatTopContributors = (pTopContributors) => {
-  let topContributors = [];
-  topContributors = pTopContributors.sort((a, b) =>
-    Number(a.totalPaidBanano) > Number(b.totalPaidBanano) ? -1 : 1
-  );
-  return topContributors;
-};
+import { useSearchParams } from "react-router-dom";
 
 const Main = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const { stats, setStats } = useMainStore();
-
-  const { data, loading } = useSubscription(STATS_SUBSCRIPTION);
-  React.useEffect(() => {
-    if (!data) return;
-    setStats({
-      ...stats,
-      totalConnected: data?.stats?.connectedWorkers,
-      totalPaidBanano: data?.stats?.totalPaidBanano,
-      registeredServiceCount: data?.stats?.registeredServiceCount,
-      topContributors:
-        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
-      services: data?.stats?.services
-    });
-  }, [data]);
+  const { stats } = useMainStore();
 
   return (
-    <div className="w-full max-w-5xl md:h-full flex flex-col items-center text-gray-100 font-semibold text-2xl mt-750 md:mt-8">
-      <div className="mb-6 flex gap-6 flex-col  md:mt-16 md:flex-row w-full  whitespace-nowrap">
+    <div className="w-full max-w-5xl h-full flex flex-col items-center text-gray-100 font-semibold text-2xl">
+      <div className="mb-6 flex gap-6 flex-col mt-8 md:mt-16 md:flex-row w-full justify-center items-center whitespace-nowrap">
         <TotalPaid amount={stats?.totalPaidBanano} />
         <TotalConnected amount={stats?.totalConnected} />
         <TotalRegistered amount={stats?.registeredServiceCount} />
@@ -57,9 +31,7 @@ const Main = () => {
             bananos by generating proof of work using your computer. You may
             also request PoW for your service, completely free of charge.
           </p>
-          <div className="mt-12 text-center text-3xl">
-            Great! I'd Like To Register
-          </div>
+          <div className="mt-12 text-center text-3xl">I'd Like To Register</div>
           <div className="w-full flex justify-center items-center gap-4">
             <button
               className={`bg-banano-yellow border-b-4 border-accent hover:bg-accent-secondary rounded-md py-2 px-4 transition-colors text-gray-900 font-bold text-sm my-4`}

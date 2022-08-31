@@ -1,25 +1,25 @@
-import React, { Suspense } from "react";
-import { Routes, Route, useSearchParams, Navigate } from "react-router-dom";
-
-import Header from "components/Header";
-import Modal from "components/Modal";
-
-import Loader from "components/Loader";
-
-import Login from "modals/Login";
-import Register from "modals/Register";
-import Recover from "modals/Recover";
-import ServiceToken from "modals/ServiceToken";
-
-import Services from "pages/Services";
-import VerifyEmail from "pages/VerifyEmail";
-import Install from "pages/Install";
-import { useCookies } from "react-cookie";
-import PasswordRecovery from "pages/PasswordRecovery";
-
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Footer } from "components/Footer";
+
+import { Navigate, Route, Routes, useSearchParams } from "react-router-dom";
+import React, { Suspense } from "react";
+
+import Footer from "components/Footer";
+import Header from "components/Header";
+import Install from "pages/Install";
+import Loader from "components/Loader";
+import Login from "modals/Login";
+import Modal from "components/Modal";
+import PasswordRecovery from "pages/PasswordRecovery";
+import Recover from "modals/Recover";
+import Register from "modals/Register";
+import { STATS_SUBSCRIPTION } from "api/Stats";
+import ServiceToken from "modals/ServiceToken";
+import Services from "pages/Services";
+import { ToastContainer } from "react-toastify";
+import VerifyEmail from "pages/VerifyEmail";
+import { useCookies } from "react-cookie";
+import { useMainStore } from "stores";
+import { useSubscription } from "@apollo/client";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -32,9 +32,33 @@ const ProtectedRoute = ({ token, children }) => {
   return children;
 };
 
+const formatTopContributors = (pTopContributors) => {
+  let topContributors = [];
+  topContributors = pTopContributors.sort((a, b) =>
+    Number(a.totalPaidBanano) > Number(b.totalPaidBanano) ? -1 : 1
+  );
+  return topContributors;
+};
+
 function App() {
   let [searchParams, setSearchParams] = useSearchParams();
   const [cookies, setCookie] = useCookies(["token"]);
+
+  const { stats, setStats } = useMainStore();
+
+  const { data } = useSubscription(STATS_SUBSCRIPTION);
+  React.useEffect(() => {
+    if (!data) return;
+    setStats({
+      ...stats,
+      totalConnected: data?.stats?.connectedWorkers,
+      totalPaidBanano: data?.stats?.totalPaidBanano,
+      registeredServiceCount: data?.stats?.registeredServiceCount,
+      topContributors:
+        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
+      services: data?.stats?.services
+    });
+  }, [data]);
 
   return (
     <div className="h-screen w-screen flex flex-col">
@@ -48,54 +72,66 @@ function App() {
 
       <Header />
 
-      <Suspense
-        fallback={
-          <div className="bg-primary w-full h-full flex justify-center items-center">
-            <Loader />
-          </div>
-        }
-      >
-        {!cookies.token && searchParams.get("modal") === "login" && (
-          <Modal modal={<Login />} title="Log In" />
-        )}
+      {/* MAIN PAGE CONTAINER */}
+      <div className="flex flex-col justify-between h-full bg-primary overflow-y-auto">
+        <div className="min-h-full">
+          <Suspense
+            fallback={
+              <div className="w-full flex justify-center items-center">
+                <Loader />
+              </div>
+            }
+          >
+            {!cookies.token && searchParams.get("modal") === "login" && (
+              <Modal modal={<Login />} title="Log In" />
+            )}
 
-        {!cookies.token && searchParams.get("modal") === "recover" && (
-          <Modal modal={<Recover />} title="Recover Password" />
-        )}
+            {!cookies.token && searchParams.get("modal") === "recover" && (
+              <Modal modal={<Recover />} title="Recover Password" />
+            )}
 
-        {searchParams.get("modal") === "register" && (
-          <Modal modal={<Register />} title="Register" />
-        )}
+            {searchParams.get("modal") === "register" && (
+              <Modal modal={<Register />} title="Register" />
+            )}
 
-        {searchParams.get("modal") === "service_token" && (
-          <Modal modal={<ServiceToken />} title="Service Token" />
-        )}
+            {searchParams.get("modal") === "service_token" && (
+              <Modal modal={<ServiceToken />} title="Service Token" />
+            )}
 
-        <div className="w-full h-full min-h-screen bg-primary flex justify-center items-center overflow-y-auto flex-col my-auto">
-          <Routes>
-            <Route path="/install" element={<Install />} />
-            <Route path="/services" element={<Services />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute token={cookies.token}>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/verify_email/:email/:token"
-              element={<VerifyEmail />}
-            />
-            <Route
-              path="/reset_password/:token"
-              element={<PasswordRecovery />}
-            />
-            <Route path="*" element={<Main />} />
-          </Routes>
+            <div className="w-full min-h-full flex justify-center items-center flex-col px-4">
+              <Routes>
+                <Route path="/install" element={<Install />} />
+                <Route path="/services" element={<Services />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute token={cookies.token}>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/verify_email/:email/:token"
+                  element={<VerifyEmail />}
+                />
+                <Route
+                  path="/reset_password/:token"
+                  element={<PasswordRecovery />}
+                />
+                <Route path="*" element={<Main />} />
+              </Routes>
+            </div>
+            {/* MOBILE FOOTER FOR SOME DUMB RESPONSIVENESS WORKAROUND */}
+            <div className="sm:hidden">
+              <Footer />
+            </div>
+          </Suspense>
+        </div>
+        <div className="hidden sm:block">
+          {/* DESKTOP FOOTER */}
           <Footer />
         </div>
-      </Suspense>
+      </div>
     </div>
   );
 }
