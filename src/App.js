@@ -19,7 +19,6 @@ import PasswordRecovery from "pages/PasswordRecovery";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Footer } from "components/Footer";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -71,7 +70,7 @@ function App() {
           <Modal modal={<ServiceToken />} title="Service Token" />
         )}
 
-        <div className="w-full h-full min-h-screen bg-primary flex justify-center items-center overflow-y-auto flex-col my-auto">
+        <div className="w-full h-full bg-primary flex justify-center items-center px-4 overflow-y-auto">
           <Routes>
             <Route path="/install" element={<Install />} />
             <Route path="/services" element={<Services />} />
@@ -93,7 +92,6 @@ function App() {
             />
             <Route path="*" element={<Main />} />
           </Routes>
-          <Footer />
         </div>
       </Suspense>
     </div>
