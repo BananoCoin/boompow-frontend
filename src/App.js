@@ -3,10 +3,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { Navigate, Route, Routes, useSearchParams } from "react-router-dom";
 import React, { Suspense } from "react";
 
+import Contributors from "pages/Contributors";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import Install from "pages/Install";
-import Loader from "components/Loader";
 import Login from "modals/Login";
 import Modal from "components/Modal";
 import PasswordRecovery from "pages/PasswordRecovery";
@@ -75,13 +75,7 @@ function App() {
       {/* MAIN PAGE CONTAINER */}
       <div className="flex flex-col justify-between h-full bg-primary overflow-y-auto">
         <div className="min-h-full">
-          <Suspense
-            fallback={
-              <div className="w-full flex justify-center items-center">
-                <Loader />
-              </div>
-            }
-          >
+          <Suspense>
             {!cookies.token && searchParams.get("modal") === "login" && (
               <Modal modal={<Login />} title="Log In" />
             )}
@@ -102,6 +96,7 @@ function App() {
               <Routes>
                 <Route path="/install" element={<Install />} />
                 <Route path="/services" element={<Services />} />
+                <Route path="/contributors" element={<Contributors />} />
                 <Route
                   path="/dashboard"
                   element={

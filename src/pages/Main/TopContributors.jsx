@@ -1,3 +1,5 @@
+import InfoSvg from "components/InfoSvg";
+import { Link } from "react-router-dom";
 import React from "react";
 import { Skeleton } from "components/Skeleton";
 import { formatBan } from "components/Banano";
@@ -12,6 +14,14 @@ const TopContributors = ({ topContributors }) => {
   return (
     <div className="bg-dark rounded-md rounded-l-none border-banano-yellow border-l-4 w-full md:w-80 drop-shadow-lg shadow-black h-[470px]">
       <div className="p-4">Top Contributors</div>
+      <Link
+        to="/contributors"
+        title="Top Contributors List"
+        className="absolute right-[10px] top-[10px]"
+      >
+        <InfoSvg />
+      </Link>
+
       <div className="text-sm overflow-y-scroll h-[406px]">
         {topContributors ? (
           <React.Fragment>
