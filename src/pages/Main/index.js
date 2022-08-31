@@ -6,34 +6,11 @@ import TotalPaid from "./TotalPaid";
 import TotalRegistered from "./TotalRegistered";
 import { useMainStore } from "stores";
 import { useSearchParams } from "react-router-dom";
-import { useSubscription } from "@apollo/client";
-
-const formatTopContributors = (pTopContributors) => {
-  let topContributors = [];
-  topContributors = pTopContributors.sort((a, b) =>
-    Number(a.totalPaidBanano) > Number(b.totalPaidBanano) ? -1 : 1
-  );
-  return topContributors;
-};
 
 const Main = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const { stats, setStats } = useMainStore();
-
-  const { data, loading } = useSubscription(STATS_SUBSCRIPTION);
-  React.useEffect(() => {
-    if (!data) return;
-    setStats({
-      ...stats,
-      totalConnected: data?.stats?.connectedWorkers,
-      totalPaidBanano: data?.stats?.totalPaidBanano,
-      registeredServiceCount: data?.stats?.registeredServiceCount,
-      topContributors:
-        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
-      services: data?.stats?.services
-    });
-  }, [data]);
+  const { stats } = useMainStore();
 
   return (
     <div className="w-full max-w-5xl h-full flex flex-col items-center text-gray-100 font-semibold text-2xl">

@@ -12,11 +12,14 @@ import Modal from "components/Modal";
 import PasswordRecovery from "pages/PasswordRecovery";
 import Recover from "modals/Recover";
 import Register from "modals/Register";
+import { STATS_SUBSCRIPTION } from "api/Stats";
 import ServiceToken from "modals/ServiceToken";
 import Services from "pages/Services";
 import { ToastContainer } from "react-toastify";
 import VerifyEmail from "pages/VerifyEmail";
 import { useCookies } from "react-cookie";
+import { useMainStore } from "stores";
+import { useSubscription } from "@apollo/client";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -29,9 +32,33 @@ const ProtectedRoute = ({ token, children }) => {
   return children;
 };
 
+const formatTopContributors = (pTopContributors) => {
+  let topContributors = [];
+  topContributors = pTopContributors.sort((a, b) =>
+    Number(a.totalPaidBanano) > Number(b.totalPaidBanano) ? -1 : 1
+  );
+  return topContributors;
+};
+
 function App() {
   let [searchParams, setSearchParams] = useSearchParams();
   const [cookies, setCookie] = useCookies(["token"]);
+
+  const { stats, setStats } = useMainStore();
+
+  const { data } = useSubscription(STATS_SUBSCRIPTION);
+  React.useEffect(() => {
+    if (!data) return;
+    setStats({
+      ...stats,
+      totalConnected: data?.stats?.connectedWorkers,
+      totalPaidBanano: data?.stats?.totalPaidBanano,
+      registeredServiceCount: data?.stats?.registeredServiceCount,
+      topContributors:
+        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
+      services: data?.stats?.services
+    });
+  }, [data]);
 
   return (
     <div className="h-screen w-screen flex flex-col">
