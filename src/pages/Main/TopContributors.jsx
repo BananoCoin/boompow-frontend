@@ -64,7 +64,7 @@ const TopContributors = ({ topContributors }) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {new Array(10).fill({}).map((_, index) => {
+            {new Array(5).fill({}).map((_, index) => {
               return (
                 <div
                   key={index}
