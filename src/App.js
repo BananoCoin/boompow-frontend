@@ -122,12 +122,12 @@ function App() {
               </Routes>
             </div>
             {/* MOBILE FOOTER FOR SOME DUMB RESPONSIVENESS WORKAROUND */}
-            <div className="sm:hidden">
+            <div className="md:hidden">
               <Footer />
             </div>
           </Suspense>
         </div>
-        <div className="hidden sm:block">
+        <div className="hidden md:block">
           {/* DESKTOP FOOTER */}
           <Footer />
         </div>

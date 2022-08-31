@@ -44,7 +44,7 @@ export default () => {
             <a href={button.link} rel="noopener" target="_blank">
               <img
                 src={require(`./icons/${button.name.toLowerCase()}.svg`)}
-                className="h-6 w-6 sm:h-7 sm:w-7 text-red-400 hover:scale-[110%] transition-transform cursor-pointer"
+                className="h-6 w-6 md:h-7 md:w-7 text-red-400 hover:scale-[110%] transition-transform cursor-pointer"
               />
             </a>
           );
