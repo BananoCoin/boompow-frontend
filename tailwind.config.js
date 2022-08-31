@@ -3,6 +3,9 @@ module.exports = {
   darkMode: "media",
   theme: {
     extend: {
+      spacing: {
+        750: "750px"
+      },
       colors: {
         primary: "#1d1e26",
         dark: "#151517",
