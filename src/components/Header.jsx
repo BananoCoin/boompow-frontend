@@ -17,7 +17,7 @@ const Header = () => {
         boxShadow: "rgb(0 0 0 / 15%) 0px 10px 12px"
       }}
     >
-      <div className="h-full w-full max-w-7xl flex items-center justify-between">
+      <div className="h-full w-full max-w-5xl flex items-center justify-between">
         <Link to="/" title="Go Home">
           <img
             src={logo}

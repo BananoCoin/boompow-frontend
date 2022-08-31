@@ -73,8 +73,8 @@ function App() {
       <Header />
 
       {/* MAIN PAGE CONTAINER */}
-      <div className="flex flex-col justify-between h-full bg-primary overflow-y-auto">
-        <div className="min-h-full">
+      <div className="flex flex-col justify-between w-full h-full bg-primary overflow-y-auto">
+        <div className="md:min-h-full">
           <Suspense>
             {!cookies.token && searchParams.get("modal") === "login" && (
               <Modal modal={<Login />} title="Log In" />
@@ -92,7 +92,7 @@ function App() {
               <Modal modal={<ServiceToken />} title="Service Token" />
             )}
 
-            <div className="w-full min-h-full flex justify-center items-center flex-col px-4">
+            <div className="w-full md:h-full flex justify-center items-center flex-col px-4 py-2">
               <Routes>
                 <Route path="/install" element={<Install />} />
                 <Route path="/services" element={<Services />} />
@@ -122,6 +122,7 @@ function App() {
             </div>
           </Suspense>
         </div>
+
         <div className="hidden md:block">
           {/* DESKTOP FOOTER */}
           <Footer />

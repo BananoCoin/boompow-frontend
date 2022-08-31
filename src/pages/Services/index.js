@@ -6,7 +6,7 @@ const Services = () => {
   const { stats } = useMainStore();
 
   return (
-    <div className="bg-dark p-2 rounded rounded-l-none w-full max-w-xl h-[600px] max-h-5/6 overflow-y-scroll border-banano-yellow border-l-4">
+    <div className="bg-dark p-2 rounded rounded-l-none w-full max-w-xl h-5/6 overflow-y-scroll border-banano-yellow border-l-4">
       <table className="text-gray-300 table-auto w-full">
         <thead>
           <tr className="[&>*]:font-medium table-fixed [&>*]:py-2 border-b-2 border-banano-yellow/25 [&>*]:px-1 [&>*]:sm:px-3 text-left">
