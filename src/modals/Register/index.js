@@ -55,10 +55,21 @@ const Register = () => {
               href="https://chat.banano.cc"
               target="_blank"
               rel="noopener"
-              className="bg-accent hover:bg-accent-secondary text-gray-900 hover:text-gray-800 transition-colors w-min whitespace-nowrap font-medium flex p-2 rounded"
+              className="bg-accent hover:bg-accent-secondary text-gray-900 hover:text-gray-800 transition-colors w-min whitespace-nowrap font-semibold text-sm flex gap-2 p-2 rounded"
               title="Join Discord"
             >
-              Join Discord
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+              >
+                <path
+                  fill="#111827"
+                  d="M14.165 16.333l-.99-1.238c1.963-.565 2.712-1.818 2.712-1.818-3.354 2.252-8.342 2.372-11.687-.015 0 0 .72 1.222 2.622 1.803L5.82 16.333c-3.31-.107-4.57-2.322-4.57-2.322 0-4.92 2.158-8.907 2.158-8.907 2.158-1.65 4.2-1.604 4.2-1.604l.15.183c-2.697.794-3.94 2-3.94 2 3.706-2.06 8.38-2.066 12.076 0 0 0-1.184-1.146-3.73-1.94l.2-.244s2.053-.046 4.2 1.604c0 0 2.157 3.987 2.157 8.907 0 0-1.273 2.215-4.585 2.322zM7.198 9.2c-.854 0-1.528.764-1.528 1.696S6.36 12.6 7.198 12.6c.854 0 1.528-.764 1.528-1.696C8.74 9.963 8.052 9.2 7.198 9.2zm5.47 0c-.854 0-1.528.764-1.528 1.696s.69 1.696 1.528 1.696c.854 0 1.528-.764 1.528-1.696S13.52 9.2 12.667 9.2z"
+                ></path>
+              </svg>
+              <div>Join Discord</div>
             </a>
           </div>
         </div>
