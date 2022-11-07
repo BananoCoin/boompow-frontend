@@ -41,7 +41,12 @@ export default () => {
       <div className="w-full max-w-3xl gap-2 flex items-center justify-center">
         {socialButtons.map((button) => {
           return (
-            <a href={button.link} rel="noopener" target="_blank">
+            <a
+              href={button.link}
+              rel="noopener"
+              target="_blank"
+              key={button.name}
+            >
               <img
                 src={require(`./icons/${button.name.toLowerCase()}.svg`)}
                 className="h-6 w-6 md:h-7 md:w-7 text-red-400 hover:scale-[110%] transition-transform cursor-pointer"
