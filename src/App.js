@@ -12,14 +12,14 @@ import Modal from "components/Modal";
 import PasswordRecovery from "pages/PasswordRecovery";
 import Recover from "modals/Recover";
 import Register from "modals/Register";
-import { STATS_SUBSCRIPTION } from "api/Stats";
+import { STATS_QUERY } from "api/Stats";
 import ServiceToken from "modals/ServiceToken";
 import Services from "pages/Services";
 import { ToastContainer } from "react-toastify";
 import VerifyEmail from "pages/VerifyEmail";
 import { useCookies } from "react-cookie";
 import { useMainStore } from "stores";
-import { useSubscription } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 const Main = React.lazy(() => import("./pages/Main"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -46,19 +46,21 @@ function App() {
 
   const { stats, setStats } = useMainStore();
 
-  const { data } = useSubscription(STATS_SUBSCRIPTION);
-  React.useEffect(() => {
-    if (!data) return;
-    setStats({
-      ...stats,
-      totalConnected: data?.stats?.connectedWorkers,
-      totalPaidBanano: data?.stats?.totalPaidBanano,
-      registeredServiceCount: data?.stats?.registeredServiceCount,
-      topContributors:
-        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
-      services: data?.stats?.services
-    });
-  }, [data]);
+  const { loading, error, data } = useQuery(STATS_QUERY, {
+    context: {
+      headers: {
+        Authorization: cookies.token
+      }
+    }
+  });
+
+  if (loading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    return "Error";
+  }
 
   return (
     <div className="h-screen w-screen flex flex-col">

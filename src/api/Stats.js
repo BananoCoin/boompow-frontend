@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const STATS_SUBSCRIPTION = gql`
-  subscription {
+export const STATS_QUERY = gql`
+  query {
     stats {
       connectedWorkers
       totalPaidBanano
