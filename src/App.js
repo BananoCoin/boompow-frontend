@@ -46,13 +46,21 @@ function App() {
 
   const { stats, setStats } = useMainStore();
 
-  const { loading, error, data } = useQuery(STATS_QUERY, {
-    context: {
-      headers: {
-        Authorization: cookies.token
-      }
+  const { loading, error, data } = useQuery(STATS_QUERY);
+  React.useEffect(() => {
+    if (!data) {
+      return;
     }
-  });
+    setStats({
+      ...stats,
+      totalConnected: data?.stats?.connectedWorkers,
+      totalPaidBanano: data?.stats?.totalPaidBanano,
+      registeredServiceCount: data?.stats?.registeredServiceCount,
+      topContributors:
+        data?.stats?.top10 && formatTopContributors(data?.stats?.top10),
+      services: data?.stats?.services
+    });
+  }, [data]);
 
   if (loading) {
     return "Loading...";
