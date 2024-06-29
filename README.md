@@ -16,7 +16,7 @@ For the backend and server, see the [BoomPoW GitHub](https://github.com/BananoCo
 
 To contribute, fork the repository, make your changes, and create a pull-request.
 
-Development is made easy with a docker development environment. Some aliases you may find convenient to add to `~/.zshrc` or `~/.bashrc`
+Development is made easy with a docker development environment. Some aliases you may find convenient to add to `~/.zshrc`  or `~/.bashrc`
 
 ```
 alias dcup="docker-compose up -d"
